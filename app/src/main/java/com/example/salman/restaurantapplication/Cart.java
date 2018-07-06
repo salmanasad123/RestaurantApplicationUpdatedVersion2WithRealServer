@@ -12,6 +12,9 @@ public class Cart {
     @SerializedName("CartItemID")
     @Expose
     private Integer cartItemID;
+    @SerializedName("ShoppingCartID")
+    @Expose
+    private Integer shoppingCartID;
     @SerializedName("ProductID")
     @Expose
     private Integer productID;
@@ -39,6 +42,10 @@ public class Cart {
     @Expose
     private Object updatedAt;
 
+    @SerializedName("price")
+    @Expose
+    private Integer price;
+
     public Integer getPrice() {
         return price;
     }
@@ -47,9 +54,13 @@ public class Cart {
         this.price = price;
     }
 
-    @SerializedName("price")
-    @Expose
-    private Integer price;
+    public Integer getShoppingCartID() {
+        return shoppingCartID;
+    }
+
+    public void setShoppingCartID(Integer shoppingCartID) {
+        this.shoppingCartID = shoppingCartID;
+    }
 
     public Integer getCustomerID() {
         return customerID;

@@ -68,12 +68,27 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
             @Override
             public void onClick(View view) {
 
+                Retrofit retrofit1 = RetrofitClient.getClient();
+                ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
+                Call<ShoppingCart> shoppingCartCall = apiInterface1.postToShoppingCart(customerIDfromEventBus);
+                shoppingCartCall.enqueue(new Callback<ShoppingCart>() {
+                    @Override
+                    public void onResponse(Call<ShoppingCart> call, Response<ShoppingCart> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                    }
+
+                    @Override
+                    public void onFailure(Call<ShoppingCart> call, Throwable t) {
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+
 
                 Retrofit retrofit = RetrofitClient.getClient();
 
 
                 final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-                final Call<Cart> cartCall = apiInterface.addToCart(products.getProductID(),1,restaurantIdFromEventBus, customerIDfromEventBus);
+                final Call<Cart> cartCall = apiInterface.addToCart(products.getProductID(), 1, 8);
 
 
                 cartCall.enqueue(new Callback<Cart>() {

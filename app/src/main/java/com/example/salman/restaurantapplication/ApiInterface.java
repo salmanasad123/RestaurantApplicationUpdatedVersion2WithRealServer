@@ -67,24 +67,26 @@ public interface ApiInterface {
     // Route to get cart items of individual Customers and individual restaurant. Maintaining cart
     // for every restaurant will allow not to order items from multiple restaurants.
 
-    @GET("api/cartitems/{restaurant_id}/{customer_id}")
-    Call<List<Cart>> getCart(@Path("restaurant_id") int restaurant_id, @Path("customer_id") int customer_id);
+    //  @GET("api/cartitems/{restaurant_id}/{customer_id}")
+    //  Call<List<Cart>> getCart(@Path("restaurant_id") int restaurant_id, @Path("customer_id") int customer_id);
 
+    @GET("api/cartitems/{customer_id}")
+    Call<List<Cart>> getCart(@Path("customer_id") int customer_id);
 
     /**
      * Post Route to Save the items added to Cart to Database
      **/
 
-
     @POST("api/cartitems")
     @FormUrlEncoded
     Call<Cart> addToCart(@Field("ProductID") int ProductID,
-                        // @Field("ProductName") String ProductName,
-                        // @Field("ProductPrice") int ProductPrice,
+                         // @Field("ProductName") String ProductName,
+                         // @Field("ProductPrice") int ProductPrice,
                          @Field("quantity") int quantity,
-                         @Field("RestaurantID") int RestaurantID,
-                         @Field("CustomerID") int CustomerID
-    );
+                         @Field("ShoppingCartID") int ShoppingCartID);
+    // @Field("RestaurantID") int RestaurantID,
+    // @Field("CustomerID") int CustomerID
+
 
     @PUT("api/cartitems/{id}")
     Call<Cart> updateCart(@Path("id") int id, @Body Cart cart);
@@ -93,8 +95,13 @@ public interface ApiInterface {
     Call<Cart> deleteItemFromCart(@Path("id") int id);
 
 
+    @POST("api/shoppingcart")
+    @FormUrlEncoded
+    Call<ShoppingCart> postToShoppingCart(@Field("CustomerID") int CustomerID);
+
+
     /**
-        FeedBack Routes /////////////////////////////////////////////////////////////
+     * FeedBack Routes /////////////////////////////////////////////////////////////
      */
 
 

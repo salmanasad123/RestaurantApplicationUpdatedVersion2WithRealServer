@@ -91,7 +91,7 @@ public class CartActivity extends AppCompatActivity {
 
 
         final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call<List<Cart>> listCall = apiInterface.getCart(RestaurantIDFromEventBus, CustomerIDfromSharedPreference);
+        Call<List<Cart>> listCall = apiInterface.getCart(CustomerIDfromSharedPreference);
 
         listCall.enqueue(new Callback<List<Cart>>() {
 
@@ -153,10 +153,10 @@ public class CartActivity extends AppCompatActivity {
             }
 
                 public void postSelection(){
-                
+
                 Retrofit retrofit = RetrofitClient.getClient();
                 final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-                Call<List<Cart>> listCall = apiInterface.getCart(RestaurantIDFromEventBus, CustomerIDfromSharedPreference);
+                Call<List<Cart>> listCall = apiInterface.getCart(CustomerIDfromSharedPreference);
 
                 listCall.enqueue(new Callback<List<Cart>>() {
                     @Override
