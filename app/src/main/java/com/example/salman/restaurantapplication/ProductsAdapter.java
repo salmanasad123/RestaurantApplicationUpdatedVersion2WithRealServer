@@ -39,6 +39,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     ShowMenuProducts showMenuProducts;
     List<GetMenuProducts> getMenuProducts;
     List<Cart> cartList;
+    static int shoppingcartid;
+    static int customerIDfromshoppingcartstable;
+
 
 
     public ProductsAdapter(ShowMenuProducts showMenuProducts, List<GetMenuProducts> getMenuProducts) {
@@ -68,27 +71,45 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
             @Override
             public void onClick(View view) {
 
-                Retrofit retrofit1 = RetrofitClient.getClient();
-                ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
-                Call<ShoppingCart> shoppingCartCall = apiInterface1.postToShoppingCart(customerIDfromEventBus);
-                shoppingCartCall.enqueue(new Callback<ShoppingCart>() {
-                    @Override
-                    public void onResponse(Call<ShoppingCart> call, Response<ShoppingCart> response) {
-                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-                    }
 
-                    @Override
-                    public void onFailure(Call<ShoppingCart> call, Throwable t) {
-                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
-                    }
-                });
+                if (customerIDfromEventBus != customerIDfromshoppingcartstable) {
 
 
+                    Retrofit retrofit1 = RetrofitClient.getClient();
+                    ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
+                    Call<ShoppingCart> shoppingCartCall = apiInterface1.postToShoppingCart(customerIDfromEventBus);
+
+                    shoppingCartCall.enqueue(new Callback<ShoppingCart>() {
+                        @Override
+                        public void onResponse(Call<ShoppingCart> call, Response<ShoppingCart> response) {
+                            Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+
+                            shoppingcartid = response.body().getShoppingCartID();
+                            customerIDfromshoppingcartstable = response.body().getCustomerID();
+
+
+                            addtocart();
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ShoppingCart> call, Throwable t) {
+                            Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                        }
+                    });
+
+                }
+                else{
+                    addtocart();
+                }
+            }
+                public void addtocart()
+                {
                 Retrofit retrofit = RetrofitClient.getClient();
 
 
                 final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-                final Call<Cart> cartCall = apiInterface.addToCart(products.getProductID(), 1, 8);
+                final Call<Cart> cartCall = apiInterface.addToCart(products.getProductID(), 1, shoppingcartid);
 
 
                 cartCall.enqueue(new Callback<Cart>() {
@@ -107,6 +128,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
                     public void onFailure(Call<Cart> call, Throwable t) {
                         Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
                     }
+
                 });
 
 
