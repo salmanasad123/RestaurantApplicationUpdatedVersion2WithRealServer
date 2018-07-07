@@ -39,9 +39,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     ShowMenuProducts showMenuProducts;
     List<GetMenuProducts> getMenuProducts;
     List<Cart> cartList;
-    static int shoppingcartid;
-    static int customerIDfromshoppingcartstable;
 
+    /**
+     * // should be made static because the products adapter class is loaded again for every item clicked
+     */
+    static int shoppingcartid;  // should be made static because the products adapter class is loaded again for every item clicked
+    static int customerIDfromshoppingcartstable;
 
 
     public ProductsAdapter(ShowMenuProducts showMenuProducts, List<GetMenuProducts> getMenuProducts) {
@@ -98,18 +101,17 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
                         }
                     });
 
-                }
-                else{
+                } else {
                     addtocart();
                 }
             }
-                public void addtocart()
-                {
+
+            public void addtocart() {
                 Retrofit retrofit = RetrofitClient.getClient();
 
 
                 final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-                final Call<Cart> cartCall = apiInterface.addToCart(products.getProductID(), 1, shoppingcartid);
+                final Call<Cart> cartCall = apiInterface.addToCart(products.getProductID(), 1, shoppingcartid, restaurantIdFromEventBus);
 
 
                 cartCall.enqueue(new Callback<Cart>() {

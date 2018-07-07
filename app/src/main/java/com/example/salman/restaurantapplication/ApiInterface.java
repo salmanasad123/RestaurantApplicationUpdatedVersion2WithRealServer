@@ -70,8 +70,8 @@ public interface ApiInterface {
     //  @GET("api/cartitems/{restaurant_id}/{customer_id}")
     //  Call<List<Cart>> getCart(@Path("restaurant_id") int restaurant_id, @Path("customer_id") int customer_id);
 
-    @GET("api/cartitems/{customer_id}")
-    Call<List<Cart>> getCart(@Path("customer_id") int customer_id);
+    @GET("api/cartitems/{customer_id}/{restaurant_id}")
+    Call<List<Cart>> getCart(@Path("customer_id") int customer_id, @Path("restaurant_id") int restaurant_id);
 
     /**
      * Post Route to Save the items added to Cart to Database
@@ -83,8 +83,8 @@ public interface ApiInterface {
                          // @Field("ProductName") String ProductName,
                          // @Field("ProductPrice") int ProductPrice,
                          @Field("quantity") int quantity,
-                         @Field("ShoppingCartID") int ShoppingCartID);
-    // @Field("RestaurantID") int RestaurantID,
+                         @Field("ShoppingCartID") int ShoppingCartID,
+                         @Field("RestaurantID") int RestaurantID);
     // @Field("CustomerID") int CustomerID
 
 
