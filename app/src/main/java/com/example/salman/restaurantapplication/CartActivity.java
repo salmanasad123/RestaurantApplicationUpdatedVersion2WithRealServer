@@ -91,7 +91,7 @@ public class CartActivity extends AppCompatActivity {
 
 
         final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call<List<Cart>> listCall = apiInterface.getCart(CustomerIDfromSharedPreference,RestaurantIDFromEventBus);
+        Call<List<Cart>> listCall = apiInterface.getCart(CustomerIDfromSharedPreference, RestaurantIDFromEventBus);
 
         listCall.enqueue(new Callback<List<Cart>>() {
 
@@ -152,11 +152,11 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
 
-                public void postSelection(){
+            public void postSelection() {
 
                 Retrofit retrofit = RetrofitClient.getClient();
                 final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-                Call<List<Cart>> listCall = apiInterface.getCart(CustomerIDfromSharedPreference,RestaurantIDFromEventBus);
+                Call<List<Cart>> listCall = apiInterface.getCart(CustomerIDfromSharedPreference, RestaurantIDFromEventBus);
 
                 listCall.enqueue(new Callback<List<Cart>>() {
                     @Override
@@ -172,8 +172,9 @@ public class CartActivity extends AppCompatActivity {
 
                             Retrofit retrofit2 = RetrofitClient.getClient();
                             ApiInterface apiInterface2 = retrofit2.create(ApiInterface.class);
-                            Call<DetailsOrder> orderCall = apiInterface2.getOrderDetails(OrderDetailsList.get(i).getProductName(),
-                                    OrderDetailsList.get(i).getQuantity(), choice, (int) Total, CustomerIDfromSharedPreference, RestaurantIDFromEventBus);
+                            Call<DetailsOrder> orderCall = apiInterface2.PostOrderDetails(OrderDetailsList.get(i).getProductName(),
+                                    OrderDetailsList.get(i).getQuantity(), choice, (int) Total, CustomerIDfromSharedPreference,
+                                    RestaurantIDFromEventBus, OrderDetailsList.get(i).getShoppingCartID());
 
                             orderCall.enqueue(new Callback<DetailsOrder>() {
                                 @Override
@@ -201,11 +202,10 @@ public class CartActivity extends AppCompatActivity {
                     }
                 });
 
-                }
+            }
 
 
-
-    //        }
+            //        }
         });
     }
 

@@ -141,12 +141,13 @@ public interface ApiInterface {
 
     @POST("api/orderdetails")
     @FormUrlEncoded
-    Call<DetailsOrder> getOrderDetails(@Field("ProductName") String ProductName,
-                                       @Field("quantity") int quantity,
-                                       @Field("OrderType") String OrderType,
-                                       @Field("TotalAmount") int TotalAmount,
-                                       @Field("CustomerID") int CustomerID,
-                                       @Field("RestaurantID") int RestaurantID);
+    Call<DetailsOrder> PostOrderDetails(@Field("ProductName") String ProductName,
+                                        @Field("quantity") int quantity,
+                                        @Field("OrderType") String OrderType,
+                                        @Field("TotalAmount") int TotalAmount,
+                                        @Field("CustomerID") int CustomerID,
+                                        @Field("RestaurantID") int RestaurantID,
+                                        @Field("ShoppingCartID") int ShoppingCartID);
 
     @GET("api/orderdetails/{customer_id}")
     Call<List<OrderHistory>> getOrderHistory(@Path("customer_id") int customer_id);
