@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -118,13 +119,19 @@ public class RegisterActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
 
-                            Snackbar.make(findViewById(android.R.id.content), "Successfully Registered", Snackbar.LENGTH_LONG)
+                            Snackbar.make(findViewById(android.R.id.content), "Successfully Registered", Snackbar.LENGTH_SHORT)
+                                    .setCallback(new Snackbar.Callback() {
+                                        @Override
+                                        public void onDismissed(Snackbar transientBottomBar, int event) {
+                                            super.onDismissed(transientBottomBar, event);
+                                            moveToLoginActivity();
+                                        }
+                                    })
                                     .show();
 
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
+
                         } else {
-                            Snackbar.make(findViewById(android.R.id.content), "Failed To Register, Email May Already Exist", Snackbar.LENGTH_LONG)
+                            Snackbar.make(findViewById(android.R.id.content), "Failed To Register, Email or Phone Number May Already Exist", Snackbar.LENGTH_LONG)
                                     .show();
                         }
                     }
@@ -143,7 +150,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
+    public void moveToLoginActivity() {
+        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 
 
 }
