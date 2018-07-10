@@ -2,6 +2,7 @@ package com.example.salman.restaurantapplication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.EventLog;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     ShowMenuProducts showMenuProducts;
     List<GetMenuProducts> getMenuProducts;
     List<Cart> cartList;
+    SharedPreferences sharedPreferences;
 
     /**
      * // should be made static because the products adapter class is loaded again for every item clicked
@@ -65,85 +67,94 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     @Override
     public void onBindViewHolder(final productsViewHolder holder, final int position) {
         final GetMenuProducts products = getMenuProducts.get(position);
+        sharedPreferences = showMenuProducts.getSharedPreferences("ProductsSP",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit().clear();
+        editor.apply();
+
+
         Log.d(TAG, "onBindViewHolder: " + products.getProductName() + " " + products.getPrice());
 
         holder.productName.setText(products.getProductName());
         holder.productPrice.setText("PKR  " + products.getPrice().toString());
 
 
-            holder.addProductbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        holder.addProductbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
-                    if (customerIDfromEventBus != customerIDfromshoppingcartstable) {
+                if (customerIDfromEventBus != customerIDfromshoppingcartstable) {
 
 
-                        Retrofit retrofit1 = RetrofitClient.getClient();
-                        ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
-                        Call<ShoppingCart> shoppingCartCall = apiInterface1.postToShoppingCart(customerIDfromEventBus);
+                    Retrofit retrofit1 = RetrofitClient.getClient();
+                    ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
+                    Call<ShoppingCart> shoppingCartCall = apiInterface1.postToShoppingCart(customerIDfromEventBus);
 
-                        shoppingCartCall.enqueue(new Callback<ShoppingCart>() {
-                            @Override
-                            public void onResponse(Call<ShoppingCart> call, Response<ShoppingCart> response) {
-                                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-
-                                shoppingcartid = response.body().getShoppingCartID();
-                                customerIDfromshoppingcartstable = response.body().getCustomerID();
-
-
-                                addtocart();
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<ShoppingCart> call, Throwable t) {
-                                Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
-                            }
-                        });
-
-                    } else {
-                        addtocart();
-                    }
-                }
-
-                public void addtocart() {
-                    Retrofit retrofit = RetrofitClient.getClient();
-
-
-                    final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-                    final Call<Cart> cartCall = apiInterface.addToCart(products.getProductID(), 1, shoppingcartid, restaurantIdFromEventBus);
-
-
-                    cartCall.enqueue(new Callback<Cart>() {
+                    shoppingCartCall.enqueue(new Callback<ShoppingCart>() {
                         @Override
-                        public void onResponse(Call<Cart> call, Response<Cart> response) {
+                        public void onResponse(Call<ShoppingCart> call, Response<ShoppingCart> response) {
                             Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
 
-                            if (response.code() == 500) {
-                                Toast.makeText(showMenuProducts, "Item Already In Cart", Toast.LENGTH_SHORT).show();
-                            } else {
+                            shoppingcartid = response.body().getShoppingCartID();
+                            customerIDfromshoppingcartstable = response.body().getCustomerID();
 
-                                Toast.makeText(showMenuProducts, "Item Added To Cart  " + products.getProductName(), Toast.LENGTH_SHORT).show();
 
-                                holder.addProductbtn.setEnabled(false);
-                                holder.addProductbtn.setText("Added");
-                            }
+                            addtocart();
+
                         }
 
                         @Override
-                        public void onFailure(Call<Cart> call, Throwable t) {
+                        public void onFailure(Call<ShoppingCart> call, Throwable t) {
                             Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
                         }
-
                     });
 
-
+                } else {
+                    addtocart();
                 }
-            });
+            }
+
+            public void addtocart() {
+                Retrofit retrofit = RetrofitClient.getClient();
 
 
-        }
+                final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+                final Call<Cart> cartCall = apiInterface.addToCart(products.getProductID(), 1, shoppingcartid, restaurantIdFromEventBus);
+
+
+                cartCall.enqueue(new Callback<Cart>() {
+                    @Override
+                    public void onResponse(Call<Cart> call, Response<Cart> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+
+                        if (response.code() == 500) {
+                            Toast.makeText(showMenuProducts, "Item Already In Cart", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            Toast.makeText(showMenuProducts, "Item Added To Cart  " + products.getProductName(), Toast.LENGTH_SHORT).show();
+
+
+
+                            holder.addProductbtn.setEnabled(false);
+                            holder.addProductbtn.setText("Added");
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Cart> call, Throwable t) {
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+
+                });
+
+
+            }
+        });
+
+
+    }
 
 
     @Override
@@ -157,6 +168,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
         TextView productName;
         TextView productPrice;
         Button addProductbtn;
+
 
         public productsViewHolder(View itemView) {
 
