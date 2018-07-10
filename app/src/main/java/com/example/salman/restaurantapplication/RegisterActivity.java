@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,8 +74,13 @@ public class RegisterActivity extends AppCompatActivity {
                     etEmail.setError("Email is Required");
                 } else {
 
-                    CustomerEmail = etEmail.getText().toString();
-
+                    Boolean valid = isEmailValid(etEmail.getText().toString());
+                    if (valid == true) {
+                        CustomerEmail = etEmail.getText().toString();
+                    }
+                    else {
+                        etEmail.setError("Email is not Valid");
+                    }
 
                 }
                 if (etPhone.getText().toString().equals("")) {
@@ -153,6 +161,26 @@ public class RegisterActivity extends AppCompatActivity {
     public void moveToLoginActivity() {
         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public boolean isEmailValid(String email) {
+        String regExpn =
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+
+        if (matcher.matches())
+            return true;
+        else
+            return false;
     }
 
 
