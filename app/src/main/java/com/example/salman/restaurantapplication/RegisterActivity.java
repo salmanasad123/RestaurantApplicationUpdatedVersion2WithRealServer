@@ -5,7 +5,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
         etPhone = findViewById(R.id.etPhone);
+
         etAddress = findViewById(R.id.etAddress);
         etCity = findViewById(R.id.etCity);
         etPassword = findViewById(R.id.etPassword);
@@ -67,16 +70,25 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     CustomerName = etName.getText().toString();
                 }
+
                 if (etEmail.getText().toString().trim().equals("")) {
                     etEmail.setError("Email is Required");
                 } else {
+
                     CustomerEmail = etEmail.getText().toString();
+
+
                 }
                 if (etPhone.getText().toString().equals("")) {
                     etPhone.setError("Phone is Required");
+
+                } else if (etPhone.getText().length() != 11) {
+                    etPhone.setError("Phone Number should be 11 digits");
+
                 } else {
                     CustomerPhone = etPhone.getText();
                 }
+
                 if (etAddress.getText().toString().trim().equals("")) {
                     etAddress.setError("Address is Required");
                 } else {
@@ -117,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
-                            Snackbar.make(findViewById(android.R.id.content), "Failed To Register", Snackbar.LENGTH_LONG)
+                            Snackbar.make(findViewById(android.R.id.content), "Failed To Register, Email May Already Exist", Snackbar.LENGTH_LONG)
                                     .show();
                         }
                     }
@@ -135,4 +147,15 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
+
+
 }
+
