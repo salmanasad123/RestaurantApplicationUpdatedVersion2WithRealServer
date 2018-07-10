@@ -63,7 +63,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     }
 
     @Override
-    public void onBindViewHolder(productsViewHolder holder, final int position) {
+    public void onBindViewHolder(final productsViewHolder holder, final int position) {
         final GetMenuProducts products = getMenuProducts.get(position);
         Log.d(TAG, "onBindViewHolder: " + products.getProductName() + " " + products.getPrice());
 
@@ -122,7 +122,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
                         if (response.code() == 500) {
                             Toast.makeText(showMenuProducts, "Item Already In Cart", Toast.LENGTH_SHORT).show();
                         } else {
+
                             Toast.makeText(showMenuProducts, "Item Added To Cart  " + products.getProductName(), Toast.LENGTH_SHORT).show();
+                            holder.addProductbtn.setEnabled(false);
+                            holder.addProductbtn.setText("Added");
                         }
                     }
 
