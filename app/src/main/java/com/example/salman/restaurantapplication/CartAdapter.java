@@ -59,6 +59,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(final CartViewHolder holder, final int position) {
         final Cart cart = carts.get(position);
 
+        preferences = activity.getSharedPreferences("ProductsSP", Context.MODE_PRIVATE);
 
         holder.CartProductName.setText(cart.getProductName());
         holder.CartProductPrice.setText("Rs " + cart.getPrice().toString());
@@ -109,6 +110,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     @Override
                     public void onResponse(Call<Cart> call, Response<Cart> response) {
                         Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                        // SharedPreferences.Editor editor = preferences.edit().remove("btnState" + cart.getRestaurantID() + cart.getProductName());
+                        // editor.apply();
                     }
 
                     @Override
@@ -178,7 +181,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     @Override
                     public void onResponse(Call<Cart> call, Response<Cart> response) {
                         Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.remove("btnState" + cart.getRestaurantID() + cart.getProductName());
+                        editor.apply();
 
                     }
 

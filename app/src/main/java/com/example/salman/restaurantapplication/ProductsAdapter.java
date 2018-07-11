@@ -41,6 +41,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     List<GetMenuProducts> getMenuProducts;
     List<Cart> cartList;
     SharedPreferences sharedPreferences;
+    String name;
 
     /**
      * // should be made static because the products adapter class is loaded again for every item clicked
@@ -67,10 +68,21 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     @Override
     public void onBindViewHolder(final productsViewHolder holder, final int position) {
         final GetMenuProducts products = getMenuProducts.get(position);
-        sharedPreferences = showMenuProducts.getSharedPreferences("ProductsSP",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit().clear();
-        editor.apply();
 
+        sharedPreferences = showMenuProducts.getSharedPreferences("ProductsSP", Context.MODE_PRIVATE);
+        sharedPreferences.getString("btnState" + products.getRestaurantID() + products.getProductName(), "None");
+
+
+        Log.d(TAG, "onBindViewHolder: SharedPref" + name);
+
+        if (sharedPreferences.getString("btnState" + products.getRestaurantID()
+                + products.getProductName(), "None").equals(products.getProductName())) {
+            holder.addProductbtn.setEnabled(false);
+            holder.addProductbtn.setText("Added");
+        } else {
+            holder.addProductbtn.setEnabled(true);
+            holder.addProductbtn.setText("Add");
+        }
 
         Log.d(TAG, "onBindViewHolder: " + products.getProductName() + " " + products.getPrice());
 
@@ -134,10 +146,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
                             Toast.makeText(showMenuProducts, "Item Added To Cart  " + products.getProductName(), Toast.LENGTH_SHORT).show();
 
 
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
 
                             holder.addProductbtn.setEnabled(false);
                             holder.addProductbtn.setText("Added");
 
+                            editor.putString("btnState" + products.getRestaurantID() + products.getProductName(), products.getProductName());
+                            editor.apply();
 
                         }
                     }
