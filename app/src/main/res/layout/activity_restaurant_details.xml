@@ -103,7 +103,7 @@
     <Button
         android:id="@+id/btnGiveFeedback"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:layout_marginEnd="24dp"

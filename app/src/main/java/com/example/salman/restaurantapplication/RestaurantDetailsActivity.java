@@ -1,6 +1,7 @@
 package com.example.salman.restaurantapplication;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +12,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.vansuita.gaussianblur.GaussianBlur;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -48,6 +51,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     CardView cardView;
     List<Feedback> feedbackList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,8 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         OrderFood = findViewById(R.id.Orderbutton);
         restaurantFb = findViewById(R.id.btnFacebook);
         GiveFeedback = findViewById(R.id.btnGiveFeedback);
+
+
 
         recyclerView = findViewById(R.id.feedbacksRecyclerView);
         layoutManager = new LinearLayoutManager(this);

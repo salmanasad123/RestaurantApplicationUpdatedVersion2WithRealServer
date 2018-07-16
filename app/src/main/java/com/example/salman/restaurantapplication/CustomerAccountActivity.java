@@ -2,6 +2,8 @@ package com.example.salman.restaurantapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+import com.vansuita.gaussianblur.GaussianBlur;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,6 +47,8 @@ public class CustomerAccountActivity extends AppCompatActivity {
 
     Integer customerIDfromSharedPreference;
 
+    ImageView imgView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,7 @@ public class CustomerAccountActivity extends AppCompatActivity {
 
         EventBus.getDefault().register(this);
 
+        imgView = findViewById(R.id.imageView);
         logoutButton = findViewById(R.id.btnLogout);
         updateButton = findViewById(R.id.btnAccountUpdate);
         recyclerView = findViewById(R.id.customerAccountRecyclerView);
@@ -56,6 +66,7 @@ public class CustomerAccountActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
         customerIDfromSharedPreference = sharedPreferences.getInt("customerID", 0);
+
 
         Retrofit retrofit = RetrofitClient.getClient();
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
