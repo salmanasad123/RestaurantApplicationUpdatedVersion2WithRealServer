@@ -3,7 +3,7 @@
     android:id="@+id/FeedbackActivityToolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#796555"
+    android:background="#feda3b"
     android:textAlignment="center">
 
 
@@ -14,6 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="FeedBack"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="20sp" />
 </android.support.v7.widget.Toolbar>
