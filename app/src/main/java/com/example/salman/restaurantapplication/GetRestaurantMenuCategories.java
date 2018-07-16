@@ -81,7 +81,7 @@ public class GetRestaurantMenuCategories extends AppCompatActivity {
 
         Picasso.with(GetRestaurantMenuCategories.this)
                 .load(getRestaurantImage)
-                .resize(1440, 1000)
+                .resize(1440, 700)
                 .into(imageView);
 
         //Event BUS///////////////////////////////////////////

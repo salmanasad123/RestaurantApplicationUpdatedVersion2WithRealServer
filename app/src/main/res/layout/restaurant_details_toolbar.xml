@@ -3,7 +3,7 @@
     android:id="@+id/detailsActivityToolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#e6c290"
+    android:background="#feda3b"
     android:textAlignment="center">
 
     <TextView
@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Details"
-        android:textColor="#FFFFFF"
+        android:text="Restaurant Details"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold" />
 
