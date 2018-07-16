@@ -19,6 +19,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -175,6 +176,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     @Override
     public int getItemCount() {
         return getMenuProducts.size();
+    }
+    public void filterList(ArrayList<GetMenuProducts> filteredList) {
+        getMenuProducts = filteredList;
+        notifyDataSetChanged();
     }
 
     public class productsViewHolder extends RecyclerView.ViewHolder {

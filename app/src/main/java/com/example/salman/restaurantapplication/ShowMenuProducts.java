@@ -6,16 +6,20 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,11 +34,13 @@ public class ShowMenuProducts extends AppCompatActivity {
     public int getCategoryiD;
     public int RestaurantIDfromEventBus;
     List<GetMenuProducts> getMenuProducts;
+    ProductsAdapter productsAdapter;
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button viewCart;
     Toolbar menuProductsToolbar;
+    EditText editText;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,12 +61,14 @@ public class ShowMenuProducts extends AppCompatActivity {
         setContentView(R.layout.activity_show_menu_products);
 
         viewCart = findViewById(R.id.ViewCart);
+        editText = findViewById(R.id.SearchProductsEditText);
+
         recyclerView = findViewById(R.id.showProducts);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         menuProductsToolbar = findViewById(R.id.menuProductsToolbar);
-        menuProductsToolbar.setTitle("Menu Items");
+        setTitle("Food Items");
         setSupportActionBar(menuProductsToolbar);
 
         getCategoryiD = getIntent().getIntExtra("myCategoryID", 0);
@@ -80,9 +88,8 @@ public class ShowMenuProducts extends AppCompatActivity {
                 Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
                 getMenuProducts = response.body();
 
-                ProductsAdapter productsAdapter = new ProductsAdapter(ShowMenuProducts.this, getMenuProducts);
+                productsAdapter = new ProductsAdapter(ShowMenuProducts.this, getMenuProducts);
                 recyclerView.setAdapter(productsAdapter);
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             }
 
             @Override
@@ -100,6 +107,34 @@ public class ShowMenuProducts extends AppCompatActivity {
             }
         });
 
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                filter(editable.toString());
+            }
+        });
+    }
+
+    public void filter(String text) {
+        ArrayList<GetMenuProducts> filteredList = new ArrayList<>();
+        for (GetMenuProducts menuProducts : getMenuProducts) {
+            if (menuProducts.getProductName().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(menuProducts);
+            }
+        }
+        productsAdapter.filterList(filteredList);
     }
 
 
