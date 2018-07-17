@@ -73,7 +73,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
         sharedPreferences = showMenuProducts.getSharedPreferences("ProductsSP", Context.MODE_PRIVATE);
         sharedPreferences.getString("btnState" + products.getRestaurantID() + products.getProductName(), "None");
 
-
         Log.d(TAG, "onBindViewHolder: SharedPref" + name);
 
         if (sharedPreferences.getString("btnState" + products.getRestaurantID()
@@ -177,6 +176,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     public int getItemCount() {
         return getMenuProducts.size();
     }
+
     public void filterList(ArrayList<GetMenuProducts> filteredList) {
         getMenuProducts = filteredList;
         notifyDataSetChanged();

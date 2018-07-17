@@ -65,8 +65,8 @@
                 android:layout_alignTop="@+id/ProductName"
                 android:background="@android:color/transparent"
                 android:text="Add"
-                android:textColor="@android:color/holo_orange_light"
-                android:textSize="16sp"
+                android:textColor="#69c730"
+                android:textSize="17sp"
 
                 android:textStyle="italic" />
         </RelativeLayout>

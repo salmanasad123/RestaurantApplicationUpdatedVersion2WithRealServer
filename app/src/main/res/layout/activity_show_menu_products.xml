@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#ebebf0"
     tools:context="com.example.salman.restaurantapplication.ShowMenuProducts">
 
 
-    <include
-        layout="@layout/menu_products_toolbar">
+    <include layout="@layout/menu_products_toolbar">
 
     </include>
 
@@ -29,7 +29,6 @@
 
 
     </android.support.v7.widget.RecyclerView>
-
 
 
     <ImageView

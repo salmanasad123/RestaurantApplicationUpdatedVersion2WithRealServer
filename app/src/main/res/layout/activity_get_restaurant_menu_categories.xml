@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ebebf0"
     tools:context="com.example.salman.restaurantapplication.GetRestaurantMenuCategories">
 
-    <include
-        layout="@layout/menu_categories_toolbar">
+    <include layout="@layout/menu_categories_toolbar">
 
     </include>
 
@@ -18,10 +18,10 @@
 
 
         <ImageView
-            android:layout_marginTop="56dp"
             android:id="@+id/menuCategorybackgroundImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
             android:background="@android:color/transparent"
             android:src="@mipmap/ic_launcher" />
 
@@ -31,10 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/menuCategorybackgroundImage"
-            android:fontFamily="sans-serif"
+            android:fontFamily="serif-monospace"
             android:text="Menu Categories"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             android:textStyle="bold" />
 
