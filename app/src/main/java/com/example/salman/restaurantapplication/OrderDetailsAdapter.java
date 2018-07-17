@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -36,6 +38,12 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
     public void onBindViewHolder(OrderDetailsViewHolder holder, int position) {
         OrderHistory orderHistory = orderHistories.get(position);
         holder.tvRestaurantName.setText(orderHistory.getRestaurantName());
+        holder.tvRestaurantAddress.setText(orderHistory.getRestaurantAddress());
+        holder.tvOrderType.setText(orderHistory.getOrderType());
+        Picasso.with(activity)
+                .load(orderHistory.getLink())
+                .resize(200,200)
+                .into(holder.RestaurantImageView);
 
     }
 

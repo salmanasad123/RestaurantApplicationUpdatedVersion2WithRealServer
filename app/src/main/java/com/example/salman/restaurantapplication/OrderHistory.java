@@ -45,6 +45,17 @@ public class OrderHistory {
     @SerializedName("RestaurantAddress")
     @Expose
     private String restaurantAddress;
+    @SerializedName("ShoppingCartID")
+    @Expose
+    private Integer shoppingCartID;
+
+    public Integer getShoppingCartID() {
+        return shoppingCartID;
+    }
+
+    public void setShoppingCartID(Integer shoppingCartID) {
+        this.shoppingCartID = shoppingCartID;
+    }
 
     public Integer getOrderDetailsID() {
         return orderDetailsID;
