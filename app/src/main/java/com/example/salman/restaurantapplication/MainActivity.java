@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 username = sharedPreferences.getString("username", "x");
 
                 if (username != "x") {
-                    Intent intent = new Intent(MainActivity.this, GetRestaurants.class);
+                    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);

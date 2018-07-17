@@ -32,11 +32,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     private static final String TAG = "MTAG";
     View view;
     List<Restaurant> restaurants;
-    GetRestaurants context;
+    Main2Activity context;
     Gson gson;
 
 
-    public RestaurantAdapter(GetRestaurants context, List<Restaurant> restaurants) {
+    public RestaurantAdapter(Main2Activity context, List<Restaurant> restaurants) {
         this.restaurants = restaurants;
         this.context = context;
 

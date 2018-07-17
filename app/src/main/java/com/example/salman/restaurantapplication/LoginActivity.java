@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (!response.body().isEmpty()) {
 
-                            Intent intent = new Intent(LoginActivity.this, GetRestaurants.class);
+                            Intent intent = new Intent(LoginActivity.this, Main2Activity.class);
                             startActivity(intent);
 
                         } else {

@@ -4,5 +4,11 @@
     <string name="cartItemNames"><u>Products</u></string>
     <string name="cartItemQuantity"><b>Qty</b></string>
     <string name="cartItemsPrices"><u><b>Price</b></u></string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>

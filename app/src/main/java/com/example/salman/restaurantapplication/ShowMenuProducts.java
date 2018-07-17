@@ -60,7 +60,7 @@ public class ShowMenuProducts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_menu_products);
 
-        viewCart = findViewById(R.id.ViewCart);
+
         editText = findViewById(R.id.SearchProductsEditText);
 
         recyclerView = findViewById(R.id.showProducts);
@@ -99,13 +99,7 @@ public class ShowMenuProducts extends AppCompatActivity {
             }
         });
 
-        viewCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ShowMenuProducts.this, CartActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
         editText.addTextChangedListener(new TextWatcher() {
