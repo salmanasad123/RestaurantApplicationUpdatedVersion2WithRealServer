@@ -8,7 +8,7 @@
     android:id="@+id/CartInfoLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#e1e1e1">
+    android:background="#FFFFFF">
 
     <include
         android:id="@+id/cart_toolbar"
@@ -62,7 +62,7 @@
 
         android:layout_alignParentStart="true"
         android:layout_below="@+id/cartProductQuantities"
-        android:background="#FFFFFF"
+        android:background="#ebebf0"
         tools:context="com.example.salman.restaurantapplication.CartActivity">
 
         <android.support.v7.widget.RecyclerView
@@ -160,7 +160,7 @@
 
         <Button
             android:id="@+id/btnPlaceOrder"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/CartTotalBill"
             android:layout_centerHorizontal="true"
