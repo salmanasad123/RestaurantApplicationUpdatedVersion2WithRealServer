@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/TvProductsAlertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="serif"
+        android:text="Product Description"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ImageViewProductsAlertDialog"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/TvProductsAlertDialog"
+        android:layout_margin="5dp"
+        android:src="@drawable/kuks" />
+
+    <TextView
+        android:id="@+id/TvProductsDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ImageViewProductsAlertDialog"
+        android:layout_margin="5dp"
+        android:layout_toEndOf="@+id/ImageViewProductsAlertDialog"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="italic" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/TvProductsAlertDialog"
+        android:layout_alignStart="@+id/ImageViewProductsAlertDialog"
+        android:background="@android:color/black" />
+</RelativeLayout>

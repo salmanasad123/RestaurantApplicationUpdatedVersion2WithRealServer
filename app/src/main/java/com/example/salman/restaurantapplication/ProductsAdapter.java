@@ -1,5 +1,6 @@
 package com.example.salman.restaurantapplication;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
@@ -39,12 +40,20 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
 
     public int restaurantIdFromEventBus;
     public Integer customerIDfromEventBus;
+
     ShowMenuProducts showMenuProducts;
     List<GetMenuProducts> getMenuProducts;
     List<Cart> cartList;
+
     SharedPreferences sharedPreferences;
     String name;
-    AlertDialog alertDialog;
+
+    /**
+     * Alter Dialog Variables
+     */
+    Dialog dialog;
+    TextView tvProductDescription;
+
 
     /**
      * // should be made static because the products adapter class is loaded again for every item clicked
@@ -98,12 +107,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               
-                AlertDialog.Builder builder = new AlertDialog.Builder(showMenuProducts);
-                builder.setTitle("Product Description");
-                builder.setMessage(products.getProductDescription());
-                alertDialog = builder.create();
-                alertDialog.show();
+
+                dialog = new Dialog(showMenuProducts);
+                dialog.setContentView(R.layout.alert_dialog_products_layout);
+                tvProductDescription = dialog.findViewById(R.id.TvProductsDescription);
+                tvProductDescription.setText(products.getProductDescription());
+                dialog.show();
+
+
             }
         });
 
