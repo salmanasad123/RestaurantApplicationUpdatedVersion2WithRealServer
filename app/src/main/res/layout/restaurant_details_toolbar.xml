@@ -3,7 +3,7 @@
     android:id="@+id/detailsActivityToolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#feda3b"
+    android:background="#0e0d0e"
     android:textAlignment="center">
 
     <TextView
@@ -12,14 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Restaurant Details"
-        android:textColor="#000000"
+        android:fontFamily="serif-monospace"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <Button
 
-        android:layout_gravity="right"
-        android:id="@+id/ButtonGoToCartActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </android.support.v7.widget.Toolbar>
