@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/menuProductsToolbar"
-    app:titleTextColor="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#0e0d0e">
+    android:background="#0e0d0e"
+    app:titleTextColor="#FFFFFF">
 
 </android.support.v7.widget.Toolbar>

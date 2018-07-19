@@ -3,6 +3,7 @@ package com.example.salman.restaurantapplication;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -51,11 +52,17 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     CardView cardView;
     List<Feedback> feedbackList;
 
+    FeedbackAdapter feedbackAdapter;
+    SwipeRefreshLayout mySwipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_details);
+
+        mySwipeRefreshLayout = findViewById(R.id.swipeRefreshRestaurantDetails);
+
         restaurantName = findViewById(R.id.tvRestaurantName);
         restaurantAddress = findViewById(R.id.tvRestaurantAddress);
         restaurantPhone = findViewById(R.id.tvRestaurantPhone);
@@ -63,7 +70,6 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         OrderFood = findViewById(R.id.Orderbutton);
         restaurantFb = findViewById(R.id.btnFacebook);
         GiveFeedback = findViewById(R.id.btnGiveFeedback);
-
 
 
         recyclerView = findViewById(R.id.feedbacksRecyclerView);
@@ -129,7 +135,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
                 Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
                 feedbackList = response.body();
 
-                FeedbackAdapter feedbackAdapter = new FeedbackAdapter(RestaurantDetailsActivity.this, feedbackList);
+                feedbackAdapter = new FeedbackAdapter(RestaurantDetailsActivity.this, feedbackList);
                 recyclerView.setAdapter(feedbackAdapter);
             }
 
@@ -140,6 +146,14 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             }
         });
 
+
+        mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.setAdapter(feedbackAdapter);
+                mySwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
 

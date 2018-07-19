@@ -1,6 +1,7 @@
 package com.example.salman.restaurantapplication;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,10 +39,13 @@ public class ShowMenuProducts extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    Button viewCart;
     Toolbar menuProductsToolbar;
     EditText editText;
 
+    SwipeRefreshLayout ProductsSwipeRefreshLayout;
+
+
+    // Toolbar Icons
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_categories, menu);
@@ -55,11 +59,12 @@ public class ShowMenuProducts extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_menu_products);
-
+        ProductsSwipeRefreshLayout = findViewById(R.id.swipeRefreshMenuProducts);
 
         editText = findViewById(R.id.SearchProductsEditText);
 
@@ -72,12 +77,13 @@ public class ShowMenuProducts extends AppCompatActivity {
         setSupportActionBar(menuProductsToolbar);
 
         getCategoryiD = getIntent().getIntExtra("myCategoryID", 0);
-
         EventBus.getDefault().register(this);
 
+
+        /**
+         * Retrofit Client
+         */
         Retrofit retrofit = RetrofitClient.getClient();
-
-
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Call<List<GetMenuProducts>> listCall = apiInterface.getMenuProducts(getCategoryiD, RestaurantIDfromEventBus);
         listCall.enqueue(new Callback<List<GetMenuProducts>>() {
@@ -100,7 +106,13 @@ public class ShowMenuProducts extends AppCompatActivity {
         });
 
 
-
+        ProductsSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.setAdapter(productsAdapter);
+                ProductsSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
