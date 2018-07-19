@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,6 +59,10 @@ public class Main2Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        //// to prevent keyboard from popping up when activity is loaded ////
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Restaurants");
         setSupportActionBar(toolbar);
@@ -87,6 +92,7 @@ public class Main2Activity extends AppCompatActivity
         mHeaderView = navigationView.getHeaderView(0);
         username = mHeaderView.findViewById(R.id.usernameTextView);
         username.setText(Username);
+        navigationView.getBackground().setAlpha(122);
         navigationView.setNavigationItemSelectedListener(this);
 
 
