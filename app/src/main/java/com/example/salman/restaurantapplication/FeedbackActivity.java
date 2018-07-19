@@ -69,7 +69,7 @@ public class FeedbackActivity extends AppCompatActivity {
                     }
                 });
 
-                Intent intent = new Intent(FeedbackActivity.this, GetRestaurants.class);
+                Intent intent = new Intent(FeedbackActivity.this, Main2Activity.class);
                 startActivity(intent);
             }
 
