@@ -10,8 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
-        android:elevation="@dimen/cardview_default_radius"
-        app:cardElevation="@dimen/cardview_default_radius">
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
 
 
         <RelativeLayout
@@ -26,8 +27,8 @@
                 android:layout_alignTop="@+id/ProductImageView"
                 android:layout_toEndOf="@+id/ProductImageView"
                 android:text="TextView"
-                android:textSize="20sp"
                 android:textColor="#000000"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="80dp"
                 tools:layout_editor_absoluteY="42dp" />
@@ -39,8 +40,8 @@
                 android:layout_alignBottom="@+id/ProductImageView"
                 android:layout_toEndOf="@+id/ProductImageView"
                 android:text="TextView"
-                android:textSize="18sp"
                 android:textColor="#000000"
+                android:textSize="18sp"
                 android:textStyle="normal"
                 tools:layout_editor_absoluteX="80dp"
                 tools:layout_editor_absoluteY="16dp" />

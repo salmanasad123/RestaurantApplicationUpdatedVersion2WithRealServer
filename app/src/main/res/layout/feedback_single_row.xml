@@ -10,8 +10,9 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:elevation="4dp"
-        app:cardElevation="@dimen/cardview_default_radius">
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
 
         <RelativeLayout
             android:id="@+id/FeedbackCardViewRelativeLayout"

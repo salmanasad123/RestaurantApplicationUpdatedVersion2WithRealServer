@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/getRestaurantToolbar"
         android:layout_marginTop="11dp"
-        android:textColor="@color/colorPrimary"
         android:layout_toEndOf="@+id/searchImageView"
-        android:hint="Search Restaurants" />
+        android:hint="Search Restaurants"
+        android:textColor="@color/colorPrimary" />
 
     <ImageView
         android:id="@+id/searchImageView"
@@ -53,7 +53,7 @@
         android:layout_height="200dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/SearchEditText"
-        android:src="@drawable/mainscreenimg" />
+        android:src="@drawable/ic_mainscreen3" />
 
 
     <android.support.v7.widget.RecyclerView
@@ -62,7 +62,9 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textViewName"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,10 +84,10 @@
         android:gravity="center">
 
         <ProgressBar
+            android:id="@+id/progressBar2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:id="@+id/progressBar2" />
+            android:indeterminate="true" />
     </RelativeLayout>
 
 

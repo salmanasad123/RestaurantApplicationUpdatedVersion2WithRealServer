@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -68,7 +69,7 @@ public class Main2Activity extends AppCompatActivity
         EventBus.getDefault().postSticky(new AccountIDEvent(CustomerIDfromSharedPreferences));
 
         recyclerView = findViewById(R.id.showRestaurants);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
 
 
