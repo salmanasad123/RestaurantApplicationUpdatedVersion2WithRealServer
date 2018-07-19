@@ -9,6 +9,7 @@
         <item name="android:textColorHint">#000000</item>
 
 
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -23,6 +24,10 @@
 
     <style name="ProgressBar" parent="Theme.AppCompat">
         <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+    <style name="EditTextLoginActivity" parent="Theme.AppCompat">
+        <item name="android:textColorHint">#FFFFFF</item>
     </style>
 
 

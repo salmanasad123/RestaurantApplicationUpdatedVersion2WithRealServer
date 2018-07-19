@@ -5,7 +5,7 @@
     android:id="@+id/loginView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_login"
+    android:background="@drawable/ic_background_login"
 
 
     tools:context="com.example.salman.restaurantapplication.LoginActivity">
@@ -33,9 +33,9 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="160dp"
-        android:alpha="0.8"
-        android:background="@drawable/edit_text_round"
+        android:background="@drawable/edit_text_with_bottom_border"
         android:hint="Enter Email ID"
+        android:theme="@style/EditTextLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
@@ -48,9 +48,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:alpha="0.8"
-        android:background="@drawable/edit_text_round"
+        android:background="@drawable/edit_text_with_bottom_border"
         android:hint="Enter Password"
         android:inputType="textPassword"
+        android:theme="@style/EditTextLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etInputEmail" />
@@ -62,7 +63,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:alpha="0.8"
+        android:alpha="0.7"
         android:background="@drawable/round_button"
         android:text="Login"
         android:textColor="#ffffff"
@@ -96,7 +97,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:alpha="0.8"
+        android:alpha="0.7"
         android:background="@drawable/round_button"
         android:text="Sign Up"
         android:textColor="#FFFFFF"

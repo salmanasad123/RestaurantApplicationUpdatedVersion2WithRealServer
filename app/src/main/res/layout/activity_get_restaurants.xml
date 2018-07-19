@@ -50,7 +50,7 @@
         android:layout_height="200dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/SearchEditText"
-        android:src="@drawable/mainscreenimg" />
+        android:src="@drawable/ic_mainscreen3" />
 
 
     <android.support.v7.widget.RecyclerView

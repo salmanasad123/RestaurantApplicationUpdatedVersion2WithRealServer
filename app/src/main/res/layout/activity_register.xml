@@ -4,114 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_login"
+    android:background="@drawable/ic_background_login"
     tools:context="com.example.salman.restaurantapplication.RegisterActivity">
 
 
     <include layout="@layout/register_activity_toolbar"></include>
 
     <EditText
-        android:alpha="0.8"
         android:id="@+id/etName"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="160dp"
-        android:background="@drawable/edit_text_round"
+        android:background="@drawable/edit_text_with_bottom_border"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         android:hint="Enter Name"
         android:inputType="textPersonName"
+        android:theme="@style/EditTextLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:alpha="0.8"
         android:id="@+id/etEmail"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_round"
+        android:alpha="0.8"
+        android:background="@drawable/edit_text_with_bottom_border"
         android:hint="Enter Email"
         android:inputType="textEmailAddress"
+        android:theme="@style/EditTextLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etName" />
 
     <EditText
-        android:alpha="0.8"
-        android:maxLength="11"
         android:id="@+id/etPhone"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/edit_text_round"
+        android:alpha="0.8"
+        android:background="@drawable/edit_text_with_bottom_border"
         android:digits="0123456789"
+
         android:hint="Enter Phone Number"
         android:inputType="phone"
+        android:maxLength="11"
+        android:theme="@style/EditTextLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <EditText
-        android:alpha="0.8"
         android:id="@+id/etAddress"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/edit_text_round"
+        android:alpha="0.8"
+        android:background="@drawable/edit_text_with_bottom_border"
         android:hint="Enter Address"
+        android:theme="@style/EditTextLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPhone" />
 
     <EditText
-        android:alpha="0.8"
         android:id="@+id/etCity"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_round"
+        android:alpha="0.8"
+        android:background="@drawable/edit_text_with_bottom_border"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         android:hint="Enter City"
+        android:theme="@style/EditTextLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etAddress" />
 
     <EditText
 
-        android:alpha="0.8"
         android:id="@+id/etPassword"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/edit_text_round"
+        android:alpha="0.8"
+        android:background="@drawable/edit_text_with_bottom_border"
         android:hint="Enter Password"
         android:inputType="textPassword"
+        android:theme="@style/EditTextLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCity" />
 
     <Button
 
-        android:alpha="0.8"
         android:id="@+id/btnRegister"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
+        android:alpha="0.7"
         android:background="@drawable/round_button"
         android:text="Register"
         android:textColor="#FFFFFF"

@@ -12,13 +12,13 @@
 
 
     <ImageView
-        android:background="#FFFFFF"
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="64dp"
+        android:background="#FFFFFF"
         android:src="@drawable/profileimage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +46,7 @@
         android:layout_marginBottom="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:alpha="0.8"
         android:background="@drawable/round_button"
         android:text="Update Profile"
         android:textColor="#FFFFFF"
@@ -61,6 +62,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="68dp"
+        android:alpha="0.8"
         android:background="@drawable/round_button"
         android:text="Logout"
         android:textColor="#FFFFFF"
