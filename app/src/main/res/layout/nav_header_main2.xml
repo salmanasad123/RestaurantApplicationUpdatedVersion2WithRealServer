@@ -20,15 +20,15 @@
         app:srcCompat="@drawable/ic_profile_big" />
 
     <TextView
-        android:textStyle="bold"
-        android:fontFamily="serif-monospace"
-        android:textSize="16sp"
         android:id="@+id/usernameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="serif-monospace"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Android Studio"
-        android:textColor="#000000"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

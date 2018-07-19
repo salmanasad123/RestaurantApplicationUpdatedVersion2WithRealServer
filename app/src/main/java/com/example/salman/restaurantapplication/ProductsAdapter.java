@@ -3,6 +3,7 @@ package com.example.salman.restaurantapplication;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.EventLog;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     List<Cart> cartList;
     SharedPreferences sharedPreferences;
     String name;
+    AlertDialog alertDialog;
 
     /**
      * // should be made static because the products adapter class is loaded again for every item clicked
@@ -89,7 +91,26 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
         holder.productName.setText(products.getProductName());
         holder.productPrice.setText("PKR  " + products.getPrice().toString());
 
+        /**
+         * If user click On the Product Row, Anywhere on the Row other than add button
+         */
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               
+                AlertDialog.Builder builder = new AlertDialog.Builder(showMenuProducts);
+                builder.setTitle("Product Description");
+                builder.setMessage(products.getProductDescription());
+                alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+
+        /**
+         *   If user clicks on Add Product Button
+         */
         holder.addProductbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -49,9 +49,25 @@ public class ProfileUpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 phoneNumber = updatePhone.getText().toString();
                 Address = updateAddress.getText().toString();
                 Password = updatePassword.getText().toString();
+
+                if (!phoneNumber.equals("")) {
+                    if (phoneNumber.length() != 11) {
+                        updatePhone.setError("Phone Number should be of 11 digits");
+                    }
+                } else {
+                    phoneNumber = updatePhone.getText().toString();
+                }
+
+                if (!Password.equals("")) {
+                    if (Password.length() != 6) {
+                        updatePassword.setError("Password must be atleast 6 characters long");
+                    }
+                }
+
 
                 Customer customer = new Customer(phoneNumber, Address, Password);
 
@@ -66,12 +82,18 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     public void onResponse(Call<Customer> call, Response<Customer> response) {
                         Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
 
-                        
+
                         if (response.code() == 200) {
-                            Snackbar.make(findViewById(android.R.id.content), "Profile Updated", Snackbar.LENGTH_LONG)
+                            Snackbar.make(findViewById(android.R.id.content), "Profile Updated", Snackbar.LENGTH_SHORT)
+                                    .setCallback(new Snackbar.Callback() {
+                                        @Override
+                                        public void onDismissed(Snackbar transientBottomBar, int event) {
+                                            super.onDismissed(transientBottomBar, event);
+                                            moveToLoginActivity();
+                                        }
+                                    })
                                     .show();
-                            Intent intent = new Intent(ProfileUpdateActivity.this, GetRestaurants.class);
-                            startActivity(intent);
+
                         } else {
                             Snackbar.make(findViewById(android.R.id.content), "Fail to Update", Snackbar.LENGTH_LONG)
                                     .show();
@@ -88,6 +110,11 @@ public class ProfileUpdateActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void moveToLoginActivity() {
+        Intent intent = new Intent(ProfileUpdateActivity.this, Main2Activity.class);
+        startActivity(intent);
     }
 
 

@@ -15,7 +15,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-import com.vansuita.gaussianblur.GaussianBlur;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

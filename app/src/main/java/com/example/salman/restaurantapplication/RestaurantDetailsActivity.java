@@ -17,7 +17,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.vansuita.gaussianblur.GaussianBlur;
+
 
 import org.greenrobot.eventbus.EventBus;
 

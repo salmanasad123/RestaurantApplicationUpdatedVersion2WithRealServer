@@ -64,7 +64,7 @@ public class MenuCategoriesAdapter extends RecyclerView.Adapter<MenuCategoriesAd
         holder.textView.setText(categories.getCategoryName());
         Picasso.with(menuCategories)
                 .load(restaurantCategories.get(position).getLink())
-                .resize(250,250)
+                .resize(100,100)
                 .into(holder.imageView);
 
 

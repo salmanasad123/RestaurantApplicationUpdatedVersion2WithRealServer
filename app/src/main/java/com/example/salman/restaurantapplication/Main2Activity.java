@@ -2,6 +2,7 @@ package com.example.salman.restaurantapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,7 +39,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Main2Activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener  {
+
+    private LocationManager locationManager;
+
+
 
     TextView username;
     View mHeaderView;
