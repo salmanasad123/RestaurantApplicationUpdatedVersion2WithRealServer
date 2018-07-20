@@ -1,6 +1,7 @@
 package com.example.salman.restaurantapplication;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -193,8 +194,8 @@ public class CartActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<Cart> call, Response<Cart> response) {
                                             Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-
-
+                                            Intent intent = new Intent(CartActivity.this, PlaceOrderThankYouActivity.class);
+                                            startActivity(intent);
                                         }
 
                                         @Override
