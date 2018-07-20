@@ -24,7 +24,7 @@
         android:layout_marginTop="11dp"
         android:layout_toEndOf="@+id/searchImageView"
         android:hint="Search Restaurants"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="#000000" />
 
     <ImageView
         android:id="@+id/searchImageView"

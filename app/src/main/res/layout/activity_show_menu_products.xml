@@ -7,7 +7,7 @@
     android:id="@+id/swipeRefreshMenuProducts"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ebebf0"
+    android:background="@drawable/ic_background_login"
     tools:context="com.example.salman.restaurantapplication.ShowMenuProducts">
 
 
@@ -60,6 +60,8 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:hint="Search Food Items"
+            android:textColor="#FFFFFF"
+            android:theme="@style/EditTextLoginActivity"
             app:layout_constraintBottom_toTopOf="@+id/showProducts"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent"

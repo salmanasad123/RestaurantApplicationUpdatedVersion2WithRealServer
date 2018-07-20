@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebebf0"
+    android:background="@drawable/ic_background_login"
     tools:context="com.example.salman.restaurantapplication.GetRestaurantMenuCategories">
 
     <include
@@ -36,7 +36,7 @@
             android:fontFamily="serif-monospace"
             android:text="MENU CATEGORIES"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
 
