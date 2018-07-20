@@ -1,10 +1,12 @@
 package com.example.salman.restaurantapplication;
 
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -42,8 +44,9 @@ public class AccountInfoAdapter extends RecyclerView.Adapter<AccountInfoAdapter.
     public void onBindViewHolder(AccountInfoViewHolder holder, int position) {
         customer = customers.get(position);
         holder.Name.setText("" + customer.getName());
-        holder.Phone.setText("" + customer.getCustomerPhone());
-        holder.Address.setText("" + customer.getCustomerAddress());
+        holder.PhoneNo.setText(customer.getCustomerPhone());
+        holder.address.setText(customer.getCustomerAddress());
+
 
     }
 
@@ -56,14 +59,17 @@ public class AccountInfoAdapter extends RecyclerView.Adapter<AccountInfoAdapter.
 
 
         TextView Name;
-        TextView Phone;
-        TextView Address;
+        EditText PhoneNo;
+        EditText address;
+
 
         public AccountInfoViewHolder(View itemView) {
             super(itemView);
             Name = itemView.findViewById(R.id.customerName);
-            Phone = itemView.findViewById(R.id.customerPhone);
-            Address = itemView.findViewById(R.id.customerAddress);
+            PhoneNo = itemView.findViewById(R.id.etAccountDetailPhone);
+            address = itemView.findViewById(R.id.etAccountDetailAddress);
+
+
         }
     }
 }

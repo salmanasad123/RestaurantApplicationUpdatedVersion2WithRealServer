@@ -39,10 +39,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Main2Activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener  {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private LocationManager locationManager;
-
 
 
     TextView username;
@@ -79,7 +78,7 @@ public class Main2Activity extends AppCompatActivity
         EventBus.getDefault().postSticky(new AccountIDEvent(CustomerIDfromSharedPreferences));
 
         recyclerView = findViewById(R.id.showRestaurants);
-        layoutManager = new GridLayoutManager(this,2);
+        layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -192,6 +191,12 @@ public class Main2Activity extends AppCompatActivity
             Intent intent = new Intent(Main2Activity.this, OrderDetailsActivity.class);
             startActivity(intent);
 
+        } else if (id == R.id.nav_logout) {
+            sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit().clear();
+            editor.apply();
+            Intent intent = new Intent(Main2Activity.this, LoginActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

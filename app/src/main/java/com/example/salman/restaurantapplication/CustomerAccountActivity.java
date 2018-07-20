@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,7 +40,7 @@ public class CustomerAccountActivity extends AppCompatActivity {
     AccountInfoAdapter accountInfoAdapter;
 
     Button updateButton;
-    Button logoutButton;
+
 
     SharedPreferences sharedPreferences;
     Integer customerIDfromEventBus;
@@ -58,11 +59,11 @@ public class CustomerAccountActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
 
         imgView = findViewById(R.id.imageView);
-        logoutButton = findViewById(R.id.btnLogout);
         updateButton = findViewById(R.id.btnAccountUpdate);
         recyclerView = findViewById(R.id.customerAccountRecyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
 
         sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
         customerIDfromSharedPreference = sharedPreferences.getInt("customerID", 0);
@@ -94,16 +95,6 @@ public class CustomerAccountActivity extends AppCompatActivity {
         //  accountInfoAdapter = new AccountInfoAdapter(CustomerAccountActivity.this, customerList);
         // recyclerView.setAdapter(accountInfoAdapter);
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit().clear();
-                editor.apply();
-                Intent intent = new Intent(CustomerAccountActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
