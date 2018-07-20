@@ -181,6 +181,28 @@ public class CartActivity extends AppCompatActivity {
                                 public void onResponse(Call<DetailsOrder> call, Response<DetailsOrder> response) {
 
                                     Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+
+
+                                    /**
+                                     *  Clear cart for specific customer after place order button is pressed
+                                     */
+                                    Retrofit retrofit1 = RetrofitClient.getClient();
+                                    ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
+                                    Call<Cart> call1 = apiInterface1.EmptyCart(OrderDetailsList.get(0).getShoppingCartID());
+                                    call1.enqueue(new Callback<Cart>() {
+                                        @Override
+                                        public void onResponse(Call<Cart> call, Response<Cart> response) {
+                                            Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Cart> call, Throwable t) {
+                                            Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                                        }
+                                    });
+
                                 }
 
                                 @Override
@@ -203,9 +225,6 @@ public class CartActivity extends AppCompatActivity {
                 });
 
             }
-
-
-            //        }
         });
     }
 

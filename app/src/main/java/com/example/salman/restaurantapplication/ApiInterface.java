@@ -85,6 +85,7 @@ public interface ApiInterface {
                          @Field("quantity") int quantity,
                          @Field("ShoppingCartID") int ShoppingCartID,
                          @Field("RestaurantID") int RestaurantID);
+
     // @Field("CustomerID") int CustomerID
 
 
@@ -151,6 +152,9 @@ public interface ApiInterface {
 
     @GET("api/orderdetails/{customer_id}")
     Call<List<OrderHistory>> getOrderHistory(@Path("customer_id") int customer_id);
+
+    @DELETE("api/cartitem/{id}")
+    Call<Cart> EmptyCart(@Path("id") int id);
 
 }
 
