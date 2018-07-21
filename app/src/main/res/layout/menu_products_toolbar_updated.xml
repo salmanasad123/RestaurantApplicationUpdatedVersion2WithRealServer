@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/menuCategoriesToolbar"
+    android:id="@+id/menuProductsToolbarUpdated"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#0e0d0e"
+    app:title="Food Items"
     app:titleTextColor="#FFFFFF">
 
+    <ImageButton
+        android:id="@+id/cartImageButton"
+        android:layout_marginLeft="220dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0e0d0e"
+        android:src="@drawable/ic_whitecart" />
 
 </android.support.v7.widget.Toolbar>

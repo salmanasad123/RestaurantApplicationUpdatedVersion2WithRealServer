@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,44 +38,31 @@ public class ShowMenuProducts extends AppCompatActivity {
     List<GetMenuProducts> getMenuProducts;
     ProductsAdapter productsAdapter;
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewMenuProducts;
     RecyclerView.LayoutManager layoutManager;
-    Toolbar menuProductsToolbar;
-    EditText editText;
 
-    SwipeRefreshLayout ProductsSwipeRefreshLayout;
+    EditText etSearch;
+    SwipeRefreshLayout MenuProductsSwipeRefreshLayout;
 
-
-    // Toolbar Icons
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_categories, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(ShowMenuProducts.this, CartActivity.class);
-        startActivity(intent);
-        return super.onOptionsItemSelected(item);
-    }
+    Toolbar myToolbar;
+    ImageButton imgButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_menu_products);
-        ProductsSwipeRefreshLayout = findViewById(R.id.swipeRefreshMenuProducts);
+        setContentView(R.layout.activity_show_menu_products_updated);
+        MenuProductsSwipeRefreshLayout = findViewById(R.id.MenuProductsSwipeRefresh);
+        myToolbar = findViewById(R.id.menuProductsToolbarUpdated);
+        setSupportActionBar(myToolbar);
+        imgButton = findViewById(R.id.cartImageButton);
 
-        editText = findViewById(R.id.SearchProductsEditText);
+        etSearch = findViewById(R.id.EtMenuProductsSearch);
 
-        recyclerView = findViewById(R.id.showProducts);
+        recyclerViewMenuProducts = findViewById(R.id.MenuProductsRecyclerView);
         layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerViewMenuProducts.setLayoutManager(layoutManager);
 
-        menuProductsToolbar = findViewById(R.id.menuProductsToolbar);
-        setTitle("Food Items");
-        setSupportActionBar(menuProductsToolbar);
 
         getCategoryiD = getIntent().getIntExtra("myCategoryID", 0);
         EventBus.getDefault().register(this);
@@ -95,7 +83,7 @@ public class ShowMenuProducts extends AppCompatActivity {
                 getMenuProducts = response.body();
 
                 productsAdapter = new ProductsAdapter(ShowMenuProducts.this, getMenuProducts);
-                recyclerView.setAdapter(productsAdapter);
+                recyclerViewMenuProducts.setAdapter(productsAdapter);
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             }
 
@@ -107,15 +95,15 @@ public class ShowMenuProducts extends AppCompatActivity {
         });
 
 
-        ProductsSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        MenuProductsSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                recyclerView.setAdapter(productsAdapter);
-                ProductsSwipeRefreshLayout.setRefreshing(false);
+                recyclerViewMenuProducts.setAdapter(productsAdapter);
+                MenuProductsSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
-        editText.addTextChangedListener(new TextWatcher() {
+        etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -130,6 +118,15 @@ public class ShowMenuProducts extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
                 filter(editable.toString());
+            }
+        });
+
+
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowMenuProducts.this, CartActivity.class);
+                startActivity(intent);
             }
         });
     }
