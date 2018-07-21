@@ -10,7 +10,7 @@
 
     <ImageButton
         android:id="@+id/cartImageButton"
-        android:layout_marginLeft="220dp"
+        android:layout_marginLeft="230dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#0e0d0e"

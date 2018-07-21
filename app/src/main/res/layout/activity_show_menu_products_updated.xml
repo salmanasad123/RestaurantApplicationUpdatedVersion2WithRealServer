@@ -23,26 +23,29 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/include4"
-            android:layout_marginStart="22dp"
-            app:srcCompat="@android:drawable/ic_menu_search" />
+            android:layout_marginStart="13dp"
+            app:srcCompat="@android:drawable/ic_search_category_default" />
 
         <EditText
             android:id="@+id/EtMenuProductsSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/menuProductsSearchImage"
+            android:layout_marginBottom="11dp"
             android:layout_toEndOf="@+id/menuProductsSearchImage"
             android:background="@drawable/edit_text_with_bottom_border"
-            android:hint="Enter Name of Food Item to Search"
+            android:hint="Search  Food  Item"
             android:theme="@style/EditTextLoginActivity" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/MenuProductsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/menuProductsSearchImage"
             android:layout_below="@+id/EtMenuProductsSearch"
-            android:layout_marginTop="26dp">
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="25dp">
 
 
         </android.support.v7.widget.RecyclerView>
