@@ -8,8 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorHint">#000000</item>
 
-
-
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -29,6 +27,11 @@
     <style name="EditTextLoginActivity" parent="Theme.AppCompat">
         <item name="android:textColorHint">#FFFFFF</item>
     </style>
+
+    <style name="DrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
+
 
 
 </resources>

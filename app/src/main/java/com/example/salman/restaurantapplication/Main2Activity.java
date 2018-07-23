@@ -96,7 +96,7 @@ public class Main2Activity extends AppCompatActivity
         mHeaderView = navigationView.getHeaderView(0);
         username = mHeaderView.findViewById(R.id.usernameTextView);
         username.setText(Username);
-        navigationView.getBackground().setAlpha(122);
+        navigationView.getBackground().setAlpha(180);     // to make transparent
         navigationView.setNavigationItemSelectedListener(this);
 
 
