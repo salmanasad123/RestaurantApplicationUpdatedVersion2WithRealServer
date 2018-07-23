@@ -37,20 +37,43 @@
         app:layout_constraintTop_toBottomOf="@+id/OrderHistoryAlertDialog" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="44dp"
+        android:text="Food Items"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/TvOrderHistoryProductNames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view1"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/ImageViewProductsAlertDialog"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/ImageViewProductsAlertDialog"
         app:layout_constraintTop_toBottomOf="@+id/OrderHistoryAlertDialog" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="84dp"
+        android:text="Quantities"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TvOrderHistoryProductQuantities"
@@ -58,26 +81,15 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/TvOrderHistoryProductNames"
         android:layout_below="@+id/TvOrderHistoryProductNames"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Hello"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="20dp"
+        android:text="Productquantity"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/ImageViewProductsAlertDialog"
         app:layout_constraintTop_toBottomOf="@+id/TvOrderHistoryProductNames" />
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="1.5dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/OrderHistoryAlertDialog"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrderHistoryAlertDialog" />
 
     <TextView
         android:id="@+id/TvOrderHistoryTotalBill"
@@ -90,6 +102,7 @@
         android:text="Total Bill"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
@@ -106,6 +119,19 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="1.5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ImageViewProductsAlertDialog"
+        android:layout_marginTop="24dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view2"
