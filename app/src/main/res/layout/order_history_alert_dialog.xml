@@ -5,13 +5,13 @@
 
 
     <TextView
-        android:id="@+id/TvProductsAlertDialog"
+        android:id="@+id/OrderHistoryAlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:fontFamily="serif"
-        android:text="Product Description"
+        android:text="Order Details"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -20,18 +20,30 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/TvProductsAlertDialog"
-        android:layout_margin="5dp"
+        android:layout_below="@+id/view1"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:src="@drawable/ic_circle_img" />
 
     <TextView
-        android:id="@+id/TvProductsDescription"
+        android:id="@+id/TvOrderHistoryProductNames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ImageViewProductsAlertDialog"
-        android:layout_margin="5dp"
+        android:layout_below="@+id/view1"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="11dp"
         android:layout_toEndOf="@+id/ImageViewProductsAlertDialog"
         android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/TvOrderHistoryProductQuantities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/TvOrderHistoryProductNames"
+        android:layout_below="@+id/TvOrderHistoryProductNames"
+        android:text="Hello"
         android:textSize="16sp"
         android:textStyle="italic" />
 
@@ -39,7 +51,8 @@
         android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignBottom="@+id/TvProductsAlertDialog"
-        android:layout_alignStart="@+id/ImageViewProductsAlertDialog"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/OrderHistoryAlertDialog"
         android:background="@android:color/black" />
+
 </RelativeLayout>

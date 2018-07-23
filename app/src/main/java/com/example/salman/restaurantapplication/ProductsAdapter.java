@@ -116,7 +116,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
                 dialog = new Dialog(showMenuProducts);
                 dialog.setContentView(R.layout.alert_dialog_products_layout);
                 tvProductDescription = dialog.findViewById(R.id.TvProductsDescription);
-                tvProductDescription.setText(products.getProductDescription());
                 dialog.show();
 
 
