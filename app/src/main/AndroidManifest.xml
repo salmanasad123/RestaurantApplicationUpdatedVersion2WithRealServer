@@ -45,6 +45,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".PlaceOrderThankYouActivity" />
+        <activity android:name=".ReviewsActivity"></activity>
     </application>
 
 </manifest>

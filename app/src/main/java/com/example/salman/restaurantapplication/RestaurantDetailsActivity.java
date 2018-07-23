@@ -45,12 +45,6 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     Button GiveFeedback;
     ImageButton restaurantFb;
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    CardView cardView;
-    List<Feedback> feedbackList;
-
-    FeedbackAdapter feedbackAdapter;
     SwipeRefreshLayout mySwipeRefreshLayout;
 
     double d;
@@ -71,11 +65,6 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restaurantFb = findViewById(R.id.btnFacebook);
         GiveFeedback = findViewById(R.id.btnGiveFeedback);
 
-
-        recyclerView = findViewById(R.id.feedbacksRecyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        cardView = findViewById(R.id.FeedbackCardView);
 
         RestaurantIDfromIntent = getIntent().getIntExtra("MyObjectID", 0);
 
@@ -116,44 +105,12 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         GiveFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RestaurantDetailsActivity.this, FeedbackActivity.class);
+                Intent intent = new Intent(RestaurantDetailsActivity.this, ReviewsActivity.class);
+                intent.putExtra("MyObjectID", RestaurantIDfromIntent);
                 startActivity(intent);
             }
         });
 
-
-        Retrofit retrofit = RetrofitClient.getClient();
-
-
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call<List<Feedback>> listCall = apiInterface.getFeedback(RestaurantIDfromIntent);
-
-        listCall.enqueue(new Callback<List<Feedback>>() {
-            @Override
-            public void onResponse(Call<List<Feedback>> call, Response<List<Feedback>> response) {
-
-                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-                feedbackList = response.body();
-
-                feedbackAdapter = new FeedbackAdapter(RestaurantDetailsActivity.this, feedbackList);
-                recyclerView.setAdapter(feedbackAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<Feedback>> call, Throwable t) {
-
-                Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
-            }
-        });
-
-
-        mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                recyclerView.setAdapter(feedbackAdapter);
-                mySwipeRefreshLayout.setRefreshing(false);
-            }
-        });
     }
 
     private void RestaurantAverageRating() {

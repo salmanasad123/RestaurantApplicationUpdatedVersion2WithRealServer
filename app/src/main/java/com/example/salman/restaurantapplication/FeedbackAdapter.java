@@ -16,11 +16,11 @@ import java.util.List;
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder> {
 
     View view;
-    RestaurantDetailsActivity detailsActivity;
+    ReviewsActivity reviewsActivity;
     List<Feedback> feedbacks;
 
-    public FeedbackAdapter(RestaurantDetailsActivity restaurantDetailsActivity, List<Feedback> feedbackList) {
-        this.detailsActivity = restaurantDetailsActivity;
+    public FeedbackAdapter(ReviewsActivity reviewsActivity, List<Feedback> feedbackList) {
+        this.reviewsActivity = reviewsActivity;
         this.feedbacks = feedbackList;
     }
 
