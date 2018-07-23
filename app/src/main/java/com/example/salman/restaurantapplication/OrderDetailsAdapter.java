@@ -42,7 +42,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         holder.tvOrderType.setText(orderHistory.getOrderType());
         Picasso.with(activity)
                 .load(orderHistory.getLink())
-                .resize(200,200)
+                .resize(250,250)
                 .into(holder.RestaurantImageView);
 
     }
