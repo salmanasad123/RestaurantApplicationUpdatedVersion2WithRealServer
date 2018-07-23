@@ -2,10 +2,10 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshRestaurantDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
-    android:id="@+id/swipeRefreshRestaurantDetails"
+    android:background="@drawable/ic_background_login"
     tools:context="com.example.salman.restaurantapplication.RestaurantDetailsActivity">
 
     <android.support.constraint.ConstraintLayout
@@ -23,8 +23,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="68dp"
             android:text="Restaurant Name"
-            android:textColor="#000000"
-            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:textSize="22dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,8 @@
             android:paddingRight="25dp"
             android:text="Restaurant Address"
             android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,12 +56,14 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:text="Restaurant Phone"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRestaurantAddress" />
 
         <RatingBar
+
             android:id="@+id/RestaurantratingBar"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
@@ -147,7 +149,7 @@
             android:fontFamily="serif-monospace"
             android:text="REVIEWS"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -158,11 +160,11 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1.5dp"
             android:layout_marginEnd="0dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="40dp"
-            android:background="@android:color/black"
+            android:background="@android:color/holo_green_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Orderbutton" />
@@ -170,9 +172,9 @@
         <View
             android:id="@+id/view1"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1.5dp"
             android:layout_marginTop="64dp"
-            android:background="@android:color/black"
+            android:background="@android:color/holo_green_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

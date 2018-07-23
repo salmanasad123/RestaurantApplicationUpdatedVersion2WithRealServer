@@ -53,6 +53,8 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     FeedbackAdapter feedbackAdapter;
     SwipeRefreshLayout mySwipeRefreshLayout;
 
+    double AverageRating;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +94,8 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restaurantName.setText(restaurant.getRestaurantName());
         restaurantAddress.setText(restaurant.getRestaurantAddress());
         restaurantPhone.setText(restaurant.getRestaurantPhone().toString());
-        restaurantRatingBar.setRating(restaurant.getRating());
+        RestaurantAverageRating();
+        restaurantRatingBar.setRating((float) AverageRating);
 
 
         OrderFood.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +155,28 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
                 mySwipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    private void RestaurantAverageRating() {
+
+        Retrofit retrofit = RetrofitClient.getClient();
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Call<Double> doubleCall = apiInterface.AvgRating(RestaurantIDfromIntent);
+        doubleCall.enqueue(new Callback<Double>() {
+            @Override
+            public void onResponse(Call<Double> call, Response<Double> response) {
+                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                response.body();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Double> call, Throwable t) {
+                Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+            }
+        });
+
     }
 
 

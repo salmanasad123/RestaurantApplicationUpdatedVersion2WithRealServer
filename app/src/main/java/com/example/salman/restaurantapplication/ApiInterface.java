@@ -156,6 +156,9 @@ public interface ApiInterface {
     @DELETE("api/cartitem/{id}")
     Call<Cart> EmptyCart(@Path("id") int id);
 
+    @GET("api/feedback/rating/{id}")
+    Call<Double> AvgRating(@Path("id") int id);
+
 }
 
 
