@@ -53,7 +53,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     FeedbackAdapter feedbackAdapter;
     SwipeRefreshLayout mySwipeRefreshLayout;
 
-    double AverageRating;
+    double d;
 
 
     @Override
@@ -95,7 +95,6 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restaurantAddress.setText(restaurant.getRestaurantAddress());
         restaurantPhone.setText(restaurant.getRestaurantPhone().toString());
         RestaurantAverageRating();
-        restaurantRatingBar.setRating((float) AverageRating);
 
 
         OrderFood.setOnClickListener(new View.OnClickListener() {
@@ -160,13 +159,17 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     private void RestaurantAverageRating() {
 
         Retrofit retrofit = RetrofitClient.getClient();
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Call<Double> doubleCall = apiInterface.AvgRating(RestaurantIDfromIntent);
         doubleCall.enqueue(new Callback<Double>() {
             @Override
             public void onResponse(Call<Double> call, Response<Double> response) {
                 Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-                response.body();
+                AverageRating averageRating = new AverageRating();
+                averageRating.setRating(response.body());
+                d = averageRating.getRating();
+
+                restaurantRatingBar.setRating((float) d);
 
 
             }
