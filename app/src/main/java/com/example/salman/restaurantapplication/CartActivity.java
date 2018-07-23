@@ -120,6 +120,9 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 {
+                    clear();
+
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
                     builder.setTitle("Select Your Choice");
                     builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
@@ -229,6 +232,13 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
+
+    public static void clear() {
+        ProductsAdapter productsAdapter = null;
+        productsAdapter.shoppingcartid = 0;
+        productsAdapter.customerIDfromshoppingcartstable = 0;
+
+    }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onEvent(GetRestaurantIDEvent event) {

@@ -58,8 +58,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
     /**
      * // should be made static because the products adapter class is loaded again for every item clicked
      */
-    static int shoppingcartid;  // should be made static because the products adapter class is loaded again for every item clicked
-    static int customerIDfromshoppingcartstable;
+    public static int shoppingcartid;  // should be made static because the products adapter class is loaded again for every item clicked
+    public static int customerIDfromshoppingcartstable;
 
 
     public ProductsAdapter(ShowMenuProducts showMenuProducts, List<GetMenuProducts> getMenuProducts) {
