@@ -26,6 +26,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
     Dialog dialog;
     TextView productNames;
     TextView productQuantities;
+    TextView totalBill;
 
     public OrderDetailsAdapter(OrderDetailsActivity orderDetailsActivity, List<OrderHistory> orderHistoryList) {
         this.activity = orderDetailsActivity;
@@ -59,8 +60,10 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
                 dialog.setContentView(R.layout.order_history_alert_dialog);
                 productNames = dialog.findViewById(R.id.TvOrderHistoryProductNames);
                 productQuantities = dialog.findViewById(R.id.TvOrderHistoryProductQuantities);
+                totalBill = dialog.findViewById(R.id.TvOrderHistoryTotalBillAmount);
                 productNames.setText(orderHistory.getProductName());
-                productQuantities.setText(orderHistory.getTotalAmount().toString());
+                productQuantities.setText(orderHistory.getQuantity());
+                totalBill.setText(orderHistory.getTotalAmount().toString());
 
 
                 dialog.show();

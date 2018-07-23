@@ -17,7 +17,7 @@ public class OrderHistory {
     private String productName;
     @SerializedName("quantity")
     @Expose
-    private Integer quantity;
+    private String quantity;
     @SerializedName("OrderType")
     @Expose
     private String orderType;
@@ -73,11 +73,11 @@ public class OrderHistory {
         this.productName = productName;
     }
 
-    public Integer getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 

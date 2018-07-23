@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="450dp"
+    android:background="@drawable/ic_background_login">
 
 
     <TextView
@@ -10,10 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="serif"
         android:text="Order Details"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ImageViewProductsAlertDialog"
@@ -21,21 +30,27 @@
         android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/view1"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/ic_circle_img" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_circle_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderHistoryAlertDialog" />
 
     <TextView
         android:id="@+id/TvOrderHistoryProductNames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view1"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:layout_toEndOf="@+id/ImageViewProductsAlertDialog"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/ImageViewProductsAlertDialog"
+        app:layout_constraintTop_toBottomOf="@+id/OrderHistoryAlertDialog" />
+
 
     <TextView
         android:id="@+id/TvOrderHistoryProductQuantities"
@@ -43,16 +58,65 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/TvOrderHistoryProductNames"
         android:layout_below="@+id/TvOrderHistoryProductNames"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Hello"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/ImageViewProductsAlertDialog"
+        app:layout_constraintTop_toBottomOf="@+id/TvOrderHistoryProductNames" />
 
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1.5dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/OrderHistoryAlertDialog"
-        android:background="@android:color/black" />
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderHistoryAlertDialog" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/TvOrderHistoryTotalBill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view2"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@+id/ImageViewProductsAlertDialog"
+        android:text="Total Bill"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/TvOrderHistoryTotalBillAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/TvOrderHistoryTotalBill"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Bill Amount"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="1.5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ImageViewProductsAlertDialog"
+        android:layout_marginBottom="280dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>
