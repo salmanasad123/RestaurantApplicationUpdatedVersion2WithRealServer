@@ -233,6 +233,11 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * After user click on the place order button this will be reset to zero
+     * to allow user to add items to cart again, add button becomes enabled again
+     * if (customerIDfromEventBus != customerIDfromshoppingcartstable) in the products adapter
+     */
     public static void clear() {
         ProductsAdapter productsAdapter = null;
         productsAdapter.shoppingcartid = 0;
