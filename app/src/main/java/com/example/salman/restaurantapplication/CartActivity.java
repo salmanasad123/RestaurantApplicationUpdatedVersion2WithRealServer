@@ -149,7 +149,6 @@ public class CartActivity extends AppCompatActivity {
 
                 });
 
-
                 radioButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -159,7 +158,6 @@ public class CartActivity extends AppCompatActivity {
                         }
                     }
                 });
-
 
                 radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -274,48 +272,7 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    public void place_order() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-        builder.setTitle("Select Your Choice");
-        View placeOrder = LayoutInflater.from(CartActivity.this).inflate(R.layout.cart_alert_dialog, null);
-        RadioGroup radioGroup = placeOrder.findViewById(R.id.RadioGroupOrderType);
-        builder.setView(placeOrder);
-        alertDialog = builder.create();
-        alertDialog.show();
-        RadioButton radioButton = radioGroup.findViewById(R.id.radioBtnCashOnDelivery);
-        RadioButton radioButton1 = radioGroup.findViewById(R.id.radioBtnDineIn);
-        RadioButton radioButton2 = radioGroup.findViewById(R.id.radioBtnTakeAway);
-
-        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    orderType = "Cash on Delivery";
-                }
-            }
-
-        });
-
-        radioButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    orderType = "Dine In";
-                }
-            }
-        });
-
-        radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    orderType = "Take Away";
-                }
-            }
-        });
-    }
-
+   
 
     /**
      * After user click on the place order button this will be reset to zero
