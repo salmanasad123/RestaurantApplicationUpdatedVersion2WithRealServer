@@ -42,7 +42,7 @@ public class PaypalActivity extends AppCompatActivity {
         servicel = new Intent(this, PayPalService.class);
         servicel.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
         startService(servicel);
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(cartTotalFromCartActivity), "USD", "GrocesStore Recived payment from : ", PayPalPayment.PAYMENT_INTENT_SALE);
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(cartTotalFromCartActivity / dollarrate), "USD", "GrocesStore Recived payment from : ", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(PaypalActivity.this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
