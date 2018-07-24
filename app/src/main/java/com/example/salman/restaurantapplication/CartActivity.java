@@ -233,11 +233,15 @@ public class CartActivity extends AppCompatActivity {
 
 
                                             if (paymentType == "Cash") {
+
                                                 Intent intent = new Intent(CartActivity.this, PlaceOrderThankYouActivity.class);
                                                 startActivity(intent);
                                             } else {
+
                                                 Intent intent = new Intent(CartActivity.this, PaypalActivity.class);
+                                                intent.putExtra("cartTotalAmount", Total);
                                                 startActivity(intent);
+
                                             }
                                         }
 
@@ -272,7 +276,6 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-   
 
     /**
      * After user click on the place order button this will be reset to zero

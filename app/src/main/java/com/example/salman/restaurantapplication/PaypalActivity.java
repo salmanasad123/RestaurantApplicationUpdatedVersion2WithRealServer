@@ -3,6 +3,7 @@ package com.example.salman.restaurantapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -14,6 +15,9 @@ import java.math.BigDecimal;
 
 public class PaypalActivity extends AppCompatActivity {
 
+    private static final String TAG = "MTAG";
+
+
     String n_paypalClienresponse = "AWoCw3OK8yxN79ybPTTkUMY79YuGS2pHcHf7T7FKrzeBeAsEVCcyGYl1X3KvcgErk6p0fEkmLLxzw_Z3";
     com.paypal.android.sdk.payments.PayPalConfiguration payPalConfiguration;
     Intent servicel;
@@ -21,10 +25,16 @@ public class PaypalActivity extends AppCompatActivity {
 
     double dollarrate = 121.60;
 
+    double cartTotalFromCartActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paypal);
+
+        cartTotalFromCartActivity = getIntent().getDoubleExtra("cartTotalAmount", 0.00);
+        Log.d(TAG, "onCreate: " + cartTotalFromCartActivity);
+
 
         payPalConfiguration = new com.paypal.android.sdk.payments.PayPalConfiguration()
                 .environment(com.paypal.android.sdk.payments.PayPalConfiguration.ENVIRONMENT_SANDBOX)
@@ -32,7 +42,7 @@ public class PaypalActivity extends AppCompatActivity {
         servicel = new Intent(this, PayPalService.class);
         servicel.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
         startService(servicel);
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(12), "USD", "GrocesStore Recived payment from : ", PayPalPayment.PAYMENT_INTENT_SALE);
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(cartTotalFromCartActivity), "USD", "GrocesStore Recived payment from : ", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(PaypalActivity.this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
@@ -57,6 +67,9 @@ public class PaypalActivity extends AppCompatActivity {
 
 
                         Toast.makeText(this, "Transaction Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(PaypalActivity.this, PlaceOrderThankYouActivity.class);
+                        startActivity(intent);
+
                     } else {
 
 
