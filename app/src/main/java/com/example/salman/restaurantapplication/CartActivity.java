@@ -1,6 +1,6 @@
 package com.example.salman.restaurantapplication;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
@@ -14,26 +14,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class CartActivity extends AppCompatActivity {
 
@@ -58,14 +54,18 @@ public class CartActivity extends AppCompatActivity {
     Integer CustomerIDfromSharedPreference;
 
     AlertDialog alertDialog;
-    CharSequence[] values = {" Cash On Delivery ", " Dine In ", " Take Away "};
-    public String choice;
+    RadioGroup radioGroupOrderType;
+    RadioGroup paymentTypeRadioGroup;
+
+    public String orderType;
+    public String paymentType;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
 
         preferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
         CustomerIDfromSharedPreference = preferences.getInt("customerID", 0);
@@ -119,41 +119,76 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                {
-                    clear();
+                clear();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+                View placeOrder = LayoutInflater.from(CartActivity.this).inflate(R.layout.cart_alert_dialog, null);
+                radioGroupOrderType = placeOrder.findViewById(R.id.RadioGroupOrderType);
+                paymentTypeRadioGroup = placeOrder.findViewById(R.id.RadioGroupPaymentType);
+
+                builder.setView(placeOrder);
+                alertDialog = builder.create();
+                alertDialog.show();
+
+                RadioButton radioButton = radioGroupOrderType.findViewById(R.id.radioBtnCashOnDelivery);
+                RadioButton radioButton1 = radioGroupOrderType.findViewById(R.id.radioBtnDineIn);
+                RadioButton radioButton2 = radioGroupOrderType.findViewById(R.id.radioBtnTakeAway);
+
+                RadioButton radioButton3 = paymentTypeRadioGroup.findViewById(R.id.Paypal);
+                RadioButton radioButton4 = paymentTypeRadioGroup.findViewById(R.id.Cash);
 
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-                    builder.setTitle("Select Your Choice");
-                    builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int item) {
+                radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            orderType = "Cash on Delivery";
 
-                            switch (item) {
-                                case 0:
-                                    Toast.makeText(CartActivity.this, "Cash on Delivery", Toast.LENGTH_SHORT).show();
-                                    choice = "Cash on Delivery";
-                                    break;
+                        }
+                    }
 
-                                case 1:
-                                    Toast.makeText(CartActivity.this, "Dine In", Toast.LENGTH_SHORT).show();
-                                    choice = "Dine In";
-                                    break;
+                });
 
 
-                                case 2:
-                                    Toast.makeText(CartActivity.this, "Take Away", Toast.LENGTH_SHORT).show();
-                                    choice = "Take Away";
-                                    break;
-                            }
-                            alertDialog.dismiss();
+                radioButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            orderType = "Dine In";
+
+                        }
+                    }
+                });
+
+
+                radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            orderType = "Take Away";
+
+                        }
+                    }
+
+                });
+
+                radioButton3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            paymentType = "Paypal/CreditCard";
                             postSelection();
                         }
-                    });
-                    alertDialog = builder.create();
-                    alertDialog.show();
+                    }
+                });
 
-                }
+                radioButton4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        paymentType = "Cash";
+                        postSelection();
+                    }
+                });
             }
 
             public void postSelection() {
@@ -177,7 +212,7 @@ public class CartActivity extends AppCompatActivity {
                             Retrofit retrofit2 = RetrofitClient.getClient();
                             ApiInterface apiInterface2 = retrofit2.create(ApiInterface.class);
                             Call<DetailsOrder> orderCall = apiInterface2.PostOrderDetails(OrderDetailsList.get(i).getProductName(),
-                                    OrderDetailsList.get(i).getQuantity(), choice, (int) Total, CustomerIDfromSharedPreference,
+                                    OrderDetailsList.get(i).getQuantity(), orderType, (int) Total, CustomerIDfromSharedPreference,
                                     RestaurantIDFromEventBus, OrderDetailsList.get(i).getShoppingCartID());
 
                             orderCall.enqueue(new Callback<DetailsOrder>() {
@@ -197,8 +232,15 @@ public class CartActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<Cart> call, Response<Cart> response) {
                                             Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-                                            Intent intent = new Intent(CartActivity.this, PlaceOrderThankYouActivity.class);
-                                            startActivity(intent);
+
+
+                                            if (paymentType == "Cash") {
+                                                Intent intent = new Intent(CartActivity.this, PlaceOrderThankYouActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                Intent intent = new Intent(CartActivity.this, PaypalActivity.class);
+                                                startActivity(intent);
+                                            }
                                         }
 
                                         @Override
@@ -228,6 +270,48 @@ public class CartActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+    }
+
+    public void place_order() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+        builder.setTitle("Select Your Choice");
+        View placeOrder = LayoutInflater.from(CartActivity.this).inflate(R.layout.cart_alert_dialog, null);
+        RadioGroup radioGroup = placeOrder.findViewById(R.id.RadioGroupOrderType);
+        builder.setView(placeOrder);
+        alertDialog = builder.create();
+        alertDialog.show();
+        RadioButton radioButton = radioGroup.findViewById(R.id.radioBtnCashOnDelivery);
+        RadioButton radioButton1 = radioGroup.findViewById(R.id.radioBtnDineIn);
+        RadioButton radioButton2 = radioGroup.findViewById(R.id.radioBtnTakeAway);
+
+        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    orderType = "Cash on Delivery";
+                }
+            }
+
+        });
+
+        radioButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    orderType = "Dine In";
+                }
+            }
+        });
+
+        radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    orderType = "Take Away";
+                }
             }
         });
     }
