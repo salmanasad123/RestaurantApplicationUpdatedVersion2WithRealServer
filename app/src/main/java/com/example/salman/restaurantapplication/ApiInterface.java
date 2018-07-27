@@ -150,7 +150,8 @@ public interface ApiInterface {
                                         @Field("RestaurantID") int RestaurantID,
                                         @Field("ShoppingCartID") int ShoppingCartID,
                                         @Field("PaymentType") String PaymentType,
-                                        @Field("OrderStatus") int OrderStatus);
+                                        @Field("OrderStatus") int OrderStatus,
+                                        @Field("ProductPrice") int ProductPrice);
 
     @GET("api/orderdetails/{customer_id}")
     Call<List<OrderHistory>> getOrderHistory(@Path("customer_id") int customer_id);

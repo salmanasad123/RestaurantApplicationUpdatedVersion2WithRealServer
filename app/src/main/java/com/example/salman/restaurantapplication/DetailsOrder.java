@@ -46,6 +46,10 @@ public class DetailsOrder {
     @Expose
     private String orderStatus;
 
+    @SerializedName("ProductPrice")
+    @Expose
+    private int productPrice;
+
     public String getProductName() {
         return productName;
     }
