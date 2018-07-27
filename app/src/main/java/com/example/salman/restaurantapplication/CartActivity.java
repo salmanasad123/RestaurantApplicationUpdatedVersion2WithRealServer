@@ -211,7 +211,7 @@ public class CartActivity extends AppCompatActivity {
                             ApiInterface apiInterface2 = retrofit2.create(ApiInterface.class);
                             Call<DetailsOrder> orderCall = apiInterface2.PostOrderDetails(OrderDetailsList.get(i).getProductName(),
                                     OrderDetailsList.get(i).getQuantity(), orderType, (int) Total, CustomerIDfromSharedPreference,
-                                    RestaurantIDFromEventBus, OrderDetailsList.get(i).getShoppingCartID());
+                                    RestaurantIDFromEventBus, OrderDetailsList.get(i).getShoppingCartID(), paymentType, 0);
 
                             orderCall.enqueue(new Callback<DetailsOrder>() {
                                 @Override
