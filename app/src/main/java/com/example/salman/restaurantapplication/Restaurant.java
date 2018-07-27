@@ -151,7 +151,7 @@ public class Restaurant {
     private String restaurantAddress;
     @SerializedName("RestaurantPhone")
     @Expose
-    private Integer restaurantPhone;
+    private String restaurantPhone;
     @SerializedName("City")
     @Expose
     private String city;
@@ -192,11 +192,11 @@ public class Restaurant {
         this.restaurantAddress = restaurantAddress;
     }
 
-    public Integer getRestaurantPhone() {
+    public String getRestaurantPhone() {
         return restaurantPhone;
     }
 
-    public void setRestaurantPhone(Integer restaurantPhone) {
+    public void setRestaurantPhone(String restaurantPhone) {
         this.restaurantPhone = restaurantPhone;
     }
 
