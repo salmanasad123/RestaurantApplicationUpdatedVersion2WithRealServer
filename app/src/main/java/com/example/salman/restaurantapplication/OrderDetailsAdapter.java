@@ -2,6 +2,7 @@ package com.example.salman.restaurantapplication;
 
 import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
                 productNames = dialog.findViewById(R.id.TvOrderHistoryProductNames);
                 productQuantities = dialog.findViewById(R.id.TvOrderHistoryProductQuantities);
                 totalBill = dialog.findViewById(R.id.TvOrderHistoryTotalBillAmount);
+                productNames.setGravity(Gravity.CENTER_HORIZONTAL);
                 productNames.setText(orderHistory.getProductName());
                 productQuantities.setText(orderHistory.getQuantity());
                 totalBill.setText(orderHistory.getTotalAmount().toString());

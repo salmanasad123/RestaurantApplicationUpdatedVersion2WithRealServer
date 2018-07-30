@@ -24,22 +24,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/ImageViewProductsAlertDialog"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/view1"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/ic_circle_img"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrderHistoryAlertDialog" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
         android:text="Food Items:"
         android:textColor="#FFFFFF"
@@ -51,31 +40,33 @@
     <TextView
 
         android:id="@+id/TvOrderHistoryProductNames"
-        android:layout_width="wrap_content"
+        android:layout_width="247dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view1"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="120dp"
         android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/ImageViewProductsAlertDialog"
         android:text="Products"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/ImageViewProductsAlertDialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OrderHistoryAlertDialog" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginBottom="288dp"
+        android:layout_marginStart="16dp"
         android:text="Quantities:"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/TvOrderHistoryProductQuantities"
@@ -83,15 +74,15 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/TvOrderHistoryProductNames"
         android:layout_below="@+id/TvOrderHistoryProductNames"
+        android:layout_marginBottom="288dp"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="20dp"
         android:text="Productquantity"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="italic"
-        app:layout_constraintStart_toEndOf="@+id/ImageViewProductsAlertDialog"
-        app:layout_constraintTop_toBottomOf="@+id/TvOrderHistoryProductNames" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView

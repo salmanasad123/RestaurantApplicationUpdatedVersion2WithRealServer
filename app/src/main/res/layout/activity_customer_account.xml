@@ -20,7 +20,7 @@
         android:layout_marginTop="96dp"
         android:elevation="8dp"
 
-        android:src="@drawable/ic_profile_pic"
+        android:src="@drawable/prof_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
