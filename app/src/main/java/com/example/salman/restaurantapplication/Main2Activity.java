@@ -29,6 +29,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +61,15 @@ public class Main2Activity extends AppCompatActivity
     SharedPreferences sharedPreferences;
     Integer CustomerIDfromSharedPreferences;
 
+    double UserLongitude;
+    double UserLatitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        EventBus.getDefault().register(this);
 
         //// to prevent keyboard from popping up when activity is loaded ////
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -100,16 +107,18 @@ public class Main2Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        Retrofit retrofit = RetrofitClient.getClient();
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        final Call<List<Restaurant>> restaurantList = apiInterface.getRestaurants();
-        restaurantList.enqueue(new Callback<List<Restaurant>>() {
+        if (UserLongitude == 0.0 && UserLatitude == 0.0) {
 
-            @Override
-            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+            Retrofit retrofit = RetrofitClient.getClient();
+            ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+            final Call<List<Restaurant>> restaurantList = apiInterface.getRestaurants();
+            restaurantList.enqueue(new Callback<List<Restaurant>>() {
 
-                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-                restaurants = response.body();
+                @Override
+                public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+
+                    Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                    restaurants = response.body();
 
 
                 /*
@@ -121,24 +130,69 @@ public class Main2Activity extends AppCompatActivity
                 });
 
                 */
-                restaurantAdapter = new RestaurantAdapter(Main2Activity.this, restaurants);
-                recyclerView.setAdapter(restaurantAdapter);
+                    restaurantAdapter = new RestaurantAdapter(Main2Activity.this, restaurants);
+                    recyclerView.setAdapter(restaurantAdapter);
 
-                /**
-                 * Progress Bar will become invisible when data is loaded, its like
-                 * a loading screen
-                 */
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    /**
+                     * Progress Bar will become invisible when data is loaded, its like
+                     * a loading screen
+                     */
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
 
-            }
+                }
 
-            @Override
-            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
-                Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
-            }
-        });
+                @Override
+                public void onFailure(Call<List<Restaurant>> call, Throwable t) {
+                    Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                }
 
+
+            });
+        } else {
+            Retrofit retrofit = RetrofitClient.getClient();
+            ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+            final Call<List<Restaurant>> restaurantList = apiInterface.postLocationData(UserLongitude, UserLatitude);
+            restaurantList.enqueue(new Callback<List<Restaurant>>() {
+
+                @Override
+                public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+
+                    Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                    restaurants = response.body();
+
+
+                /*
+                Collections.sort(restaurants, new Comparator<Restaurant>() {
+                    @Override
+                    public int compare(Restaurant restaurant, Restaurant t1) {
+                        return restaurant.getRating() > t1.getRating() ? -1 : (restaurant.getRating() < t1.getRating()) ? 1 : 0;
+                    }
+                });
+
+                */
+                    restaurantAdapter = new RestaurantAdapter(Main2Activity.this, restaurants);
+                    recyclerView.setAdapter(restaurantAdapter);
+
+                    /**
+                     * Progress Bar will become invisible when data is loaded, its like
+                     * a loading screen
+                     */
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+
+
+                }
+
+                @Override
+                public void onFailure(Call<List<Restaurant>> call, Throwable t) {
+                    Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                }
+
+
+            });
+
+
+        }
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -213,4 +267,14 @@ public class Main2Activity extends AppCompatActivity
         }
         restaurantAdapter.filterList(filteredList);
     }
+
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEvent(LocationEvent locationEvent) {
+
+        UserLongitude = locationEvent.getLongitude();
+        UserLatitude = locationEvent.getLatitude();
+    }
 }
+
+

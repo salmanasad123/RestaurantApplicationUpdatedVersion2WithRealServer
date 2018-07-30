@@ -167,6 +167,12 @@ public class Restaurant {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("Longitude")
+    @Expose
+    private Integer longitude;
+    @SerializedName("Latitude")
+    @Expose
+    private Integer latitude;
 
     public Integer getRestaurantID() {
         return restaurantID;
@@ -240,5 +246,20 @@ public class Restaurant {
         this.updatedAt = updatedAt;
     }
 
+    public Integer getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Integer longitude) {
+        this.longitude = longitude;
+    }
+
+    public Integer getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Integer latitude) {
+        this.latitude = latitude;
+    }
 }
 

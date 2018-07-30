@@ -162,6 +162,11 @@ public interface ApiInterface {
     @GET("api/feedback/rating/{id}")
     Call<Double> AvgRating(@Path("id") int id);
 
+    @POST("api/restaurantByLocation")
+    @FormUrlEncoded
+    Call<List<Restaurant>> postLocationData(@Field("Longitude") double longitude,
+                                            @Field("Latitude") double latitude);
+
 }
 
 
