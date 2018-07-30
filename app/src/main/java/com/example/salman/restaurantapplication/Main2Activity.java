@@ -284,8 +284,8 @@ public class Main2Activity extends AppCompatActivity
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onEvent(LocationEvent locationEvent) {
 
-        UserLongitude = 0.00;
-        UserLatitude = 0.00;
+        UserLongitude = 72.01;
+        UserLatitude = 31.00;
     }
 }
 

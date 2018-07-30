@@ -13,7 +13,21 @@
         android:layout_height="wrap_content">
 
 
-        <include layout="@layout/restaurant_details_toolbar"></include>
+        <include
+            android:id="@+id/include6"
+            layout="@layout/restaurant_details_toolbar"></include>
+
+        <ImageView
+            android:id="@+id/restaurantImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="88dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvRestaurantName"
@@ -21,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="220dp"
             android:text="Restaurant Name"
             android:textColor="#FFFFFF"
             android:textSize="22dp"
@@ -79,31 +93,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRestaurantPhone" />
 
-        <Button
-            android:id="@+id/Orderbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/round_button"
-            android:text="Order Food"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RestaurantratingBar" />
 
         <ImageButton
             android:id="@+id/btnFacebook"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toStartOf="@+id/Orderbutton"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="8dp"
+
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/RestaurantratingBar"
@@ -118,7 +116,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
             android:background="@drawable/round_button"
-            android:text="View Feedback"
+            android:text="View Feedbacks"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

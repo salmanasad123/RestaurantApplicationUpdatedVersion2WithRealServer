@@ -1,5 +1,6 @@
 package com.example.salman.restaurantapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,10 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,9 +44,10 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     TextView restaurantAddress;
     TextView restaurantPhone;
     RatingBar restaurantRatingBar;
-    Button OrderFood;
+
     Button GiveFeedback;
     ImageButton restaurantFb;
+    ImageView imageView;
 
     SwipeRefreshLayout mySwipeRefreshLayout;
 
@@ -57,11 +61,12 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
 
         mySwipeRefreshLayout = findViewById(R.id.swipeRefreshRestaurantDetails);
 
+        imageView = findViewById(R.id.restaurantImg);
         restaurantName = findViewById(R.id.tvRestaurantName);
         restaurantAddress = findViewById(R.id.tvRestaurantAddress);
         restaurantPhone = findViewById(R.id.tvRestaurantPhone);
         restaurantRatingBar = findViewById(R.id.RestaurantratingBar);
-        OrderFood = findViewById(R.id.Orderbutton);
+
         restaurantFb = findViewById(R.id.btnFacebook);
         GiveFeedback = findViewById(R.id.btnGiveFeedback);
 
@@ -83,17 +88,12 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restaurantName.setText(restaurant.getRestaurantName());
         restaurantAddress.setText(restaurant.getRestaurantAddress());
         restaurantPhone.setText(restaurant.getRestaurantPhone().toString());
+        Picasso.with(this).load(restaurant.getLink())
+                .resize(250, 250)
+                .into(imageView);
         RestaurantAverageRating();
 
 
-        OrderFood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(RestaurantDetailsActivity.this, GetRestaurantMenuCategories.class);
-                startActivity(intent);
-            }
-        });
         restaurantFb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
