@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 longitude = location.getLongitude();
-                latitude = location.getLongitude();
+                latitude = location.getLatitude();
 
                 if (longitude != 0.0 && latitude != 0.0) {
                     findViewById(R.id.loadingPanel).setVisibility(View.GONE);

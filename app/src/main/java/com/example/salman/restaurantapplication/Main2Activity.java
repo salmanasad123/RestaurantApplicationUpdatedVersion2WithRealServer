@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -286,6 +287,7 @@ public class Main2Activity extends AppCompatActivity
 
         UserLongitude = locationEvent.getLongitude();
         UserLatitude = locationEvent.getLatitude();
+        Toast.makeText(this, "   " + UserLongitude + "    " + UserLatitude, Toast.LENGTH_SHORT).show();
     }
 }
 
