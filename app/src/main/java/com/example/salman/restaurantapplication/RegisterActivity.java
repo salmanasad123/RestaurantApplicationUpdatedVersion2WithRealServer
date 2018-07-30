@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 if (etPassword.getText().toString().trim().equals("")) {
                     etPassword.setError("Password is Required");
-                } else if (etPassword.getText().length() < 6 ) {
+                } else if (etPassword.getText().length() < 6) {
                     etPassword.setError("Password should be 6 Characters long");
                 } else {
                     CustomerPassword = etPassword.getText().toString();

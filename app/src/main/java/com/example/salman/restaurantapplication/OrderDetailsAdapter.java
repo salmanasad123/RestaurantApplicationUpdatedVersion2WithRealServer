@@ -2,6 +2,7 @@ package com.example.salman.restaurantapplication;
 
 import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,10 +61,13 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
             @Override
             public void onClick(View v) {
                 dialog = new Dialog(activity);
+
+
                 dialog.setContentView(R.layout.order_history_alert_dialog);
                 productNames = dialog.findViewById(R.id.TvOrderHistoryProductNames);
                 productQuantities = dialog.findViewById(R.id.TvOrderHistoryProductQuantities);
                 totalBill = dialog.findViewById(R.id.TvOrderHistoryTotalBillAmount);
+
                 productNames.setGravity(Gravity.CENTER_HORIZONTAL);
                 productNames.setText(orderHistory.getProductName());
                 productQuantities.setText(orderHistory.getQuantity());
