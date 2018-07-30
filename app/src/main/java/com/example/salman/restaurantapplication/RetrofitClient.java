@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Salman on 6/22/2018.
  */
-//"http://www.grocestores.com/fyprestaurant/")
+
 public class RetrofitClient {
 
     private static Retrofit retrofit = null;
@@ -15,7 +15,7 @@ public class RetrofitClient {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.8:8000")
+                    .baseUrl("http://www.grocestores.com/fyprestaurant/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

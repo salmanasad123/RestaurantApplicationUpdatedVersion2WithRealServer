@@ -6,6 +6,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,6 +62,8 @@ public class Main2Activity extends AppCompatActivity
     SharedPreferences sharedPreferences;
     Integer CustomerIDfromSharedPreferences;
 
+    SwipeRefreshLayout mySwipeRefreshLayout;
+
     double UserLongitude;
     double UserLatitude;
 
@@ -77,6 +80,8 @@ public class Main2Activity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Restaurants");
         setSupportActionBar(toolbar);
+
+        mySwipeRefreshLayout = findViewById(R.id.Main2ActivitySwipeRefresh);
 
         sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
         Username = sharedPreferences.getString("username", "");
@@ -211,6 +216,13 @@ public class Main2Activity extends AppCompatActivity
         });
 
 
+        mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.setAdapter(restaurantAdapter);
+                mySwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -272,8 +284,8 @@ public class Main2Activity extends AppCompatActivity
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onEvent(LocationEvent locationEvent) {
 
-        UserLongitude = locationEvent.getLongitude();
-        UserLatitude = locationEvent.getLatitude();
+        UserLongitude = 0.00;
+        UserLatitude = 0.00;
     }
 }
 
