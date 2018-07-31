@@ -124,7 +124,8 @@ public interface ApiInterface {
                                     @Field("CustomerPhone") Editable CustomerPhone,
                                     @Field("CustomerAddress") String CustomerAddress,
                                     @Field("City") String City,
-                                    @Field("Password") String Password);
+                                    @Field("Password") String Password,
+                                    @Field("ProfileImage") String ProfileImage);
 
 
     @POST("api/login")

@@ -8,7 +8,22 @@
     tools:context="com.example.salman.restaurantapplication.RegisterActivity">
 
 
-    <include layout="@layout/register_activity_toolbar"></include>
+    <include
+        android:id="@+id/include7"
+        layout="@layout/register_activity_toolbar"></include>
+
+    <ImageView
+
+        android:id="@+id/uploadImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="72dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include7" />
 
     <EditText
         android:id="@+id/etName"
@@ -16,7 +31,7 @@
         android:layout_height="49dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="108dp"
         android:background="@drawable/edit_text_with_bottom_border"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         android:hint="Enter Name"
@@ -114,10 +129,10 @@
         android:id="@+id/btnRegister"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:alpha="0.8"
+        android:alpha="0.9"
         android:background="@drawable/round_button"
         android:text="Register"
         android:textColor="#FFFFFF"
@@ -125,5 +140,23 @@
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnImageUpload"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:alpha="0.9"
+        android:background="@drawable/round_button"
+        android:text="Image Upload"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

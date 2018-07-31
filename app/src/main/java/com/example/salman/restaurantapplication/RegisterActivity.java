@@ -3,16 +3,24 @@ package com.example.salman.restaurantapplication;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +33,7 @@ import retrofit2.Retrofit;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "MTAG";
-
+    private static final int PICK_IMAGE = 100;
 
     EditText etName;
     EditText etEmail;
@@ -48,6 +56,10 @@ public class RegisterActivity extends AppCompatActivity {
     NotificationManager notificationManager;
     String Id = "channel 1";
 
+    Button imageUpload;
+    ImageView imageView;
+    String encodedImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
+        imageView = findViewById(R.id.uploadImageView);
 
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
@@ -66,6 +79,15 @@ public class RegisterActivity extends AppCompatActivity {
         etCity = findViewById(R.id.etCity);
         etPassword = findViewById(R.id.etPassword);
         btnRegister = findViewById(R.id.btnRegister);
+        imageUpload = findViewById(R.id.btnImageUpload);
+
+
+        imageUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 Call<Customer> customerCall = apiInterface.registerCustomer(CustomerName, CustomerEmail,
-                        (CustomerPhone), CustomerAddress, CustomerCity, CustomerPassword);
+                        (CustomerPhone), CustomerAddress, CustomerCity, CustomerPassword, encodedImage);
 
                 customerCall.enqueue(new Callback<Customer>() {
                     @Override
@@ -205,5 +227,54 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+    private void openGallery() {
+        Intent gallery =
+                new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && null != data) {
+            if (resultCode == RESULT_OK) {
+
+                Uri selectedImage = data.getData();
+
+                Log.i("selectedImage", "selectedImage: " + selectedImage.toString());
+
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                cursor.moveToFirst();
+                int columnIndex = cursor
+                        .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                cursor.moveToFirst();
+
+                Log.i("columnIndex", "columnIndex: " + columnIndex);
+
+                final String picturePath = cursor.getString(columnIndex);
+                Log.i("picturePath", "picturePath: " + picturePath);
+
+                cursor.close();
+
+                imageView.setImageURI(selectedImage);
+//                Bitmap bm = BitmapFactory.decodeFile(picturePath);
+                Bitmap bm = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 0, baos);
+                final byte[] b = baos.toByteArray();
+
+                encodedImage = Base64.encodeToString(b, Base64.CRLF);
+                Log.d(TAG, "onActivityResult: " + encodedImage);
+                Log.i("encodedImage", "encodedImagee: " + encodedImage);
+
+
+            }
+        }
+    }
 }
 

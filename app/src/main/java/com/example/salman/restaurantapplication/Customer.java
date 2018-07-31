@@ -36,6 +36,10 @@ public class Customer {
     @Expose
     private String updatedAt;
 
+    @SerializedName("ProfileImage")
+    @Expose
+    private String profileImage;
+
     public Customer(String customerPhone, String customerAddress, String customerEmail, String password) {
         this.customerPhone = customerPhone;
         this.customerAddress = customerAddress;
@@ -115,5 +119,12 @@ public class Customer {
         this.updatedAt = updatedAt;
     }
 
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
 }
 

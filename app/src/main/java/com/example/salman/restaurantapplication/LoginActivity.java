@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText inputPassword;
     Button btnSignUp;
     Button Login;
-    Button forgotPassword;
+
 
     String getEmail;
     String getPassword;
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.etInputPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
         Login = findViewById(R.id.btnLogin);
-        forgotPassword = findViewById(R.id.btnForgetPassword);
+
 
         sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
 
@@ -163,12 +163,6 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 }
 
