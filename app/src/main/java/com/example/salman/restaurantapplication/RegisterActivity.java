@@ -227,6 +227,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * ////////////// SELECT IMAGE FROM GALLERY AND UPLOAD IT //////////
+     * Select image from gallery and convert it to string to upload it to customer's table ///
+     * encoded image contains the string that is sent to server
+     */
+
     private void openGallery() {
         Intent gallery =
                 new Intent(Intent.ACTION_PICK,
