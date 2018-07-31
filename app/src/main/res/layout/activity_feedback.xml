@@ -18,7 +18,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="160dp"
         android:gravity="center_horizontal"
-        android:text="We hope you enjoyed your meal with us today"
+        android:text="We hope you enjoyed your meal with us today, How would you Rate this Restaurant on a scale of 1-5 with 5 being excellent"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -28,7 +28,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RatingBar
-        android:theme="@style/RatingBar"
         android:id="@+id/feedbackRating"
         style="@style/Widget.AppCompat.RatingBar"
         android:layout_width="wrap_content"
@@ -39,6 +38,7 @@
         android:numStars="5"
         android:rating="2"
         android:stepSize="1"
+        android:theme="@style/RatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FeedbackQuestion" />

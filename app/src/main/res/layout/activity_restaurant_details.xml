@@ -78,6 +78,7 @@
 
         <RatingBar
 
+
             android:id="@+id/RestaurantratingBar"
             style="@style/Widget.AppCompat.RatingBar.Indicator"
             android:layout_width="wrap_content"
@@ -85,7 +86,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:isIndicator="false"
+            android:isIndicator="true"
             android:numStars="5"
             android:stepSize="1"
             android:theme="@style/RatingBar"
