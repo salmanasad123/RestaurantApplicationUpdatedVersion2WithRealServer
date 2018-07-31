@@ -1,7 +1,10 @@
 package com.example.salman.restaurantapplication;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -42,12 +45,17 @@ public class RegisterActivity extends AppCompatActivity {
     String CustomerCity;
     String CustomerPassword;
 
+    NotificationManager notificationManager;
+    String Id = "channel 1";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         toolbar = findViewById(R.id.registerActivitToolbar);
+
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 
         etName = findViewById(R.id.etName);
@@ -132,6 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
 
+
                             Snackbar.make(findViewById(android.R.id.content), "Successfully Registered", Snackbar.LENGTH_SHORT)
                                     .setCallback(new Snackbar.Callback() {
                                         @Override
@@ -164,6 +173,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void moveToLoginActivity() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(RegisterActivity.this, Id)
+                .setContentTitle("Registered Successfully")
+                .setSmallIcon(R.drawable.ic_check_mark);
+        Notification notification = builder.build();
+        notificationManager.notify(0, notification);
+
         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
         startActivity(intent);
     }

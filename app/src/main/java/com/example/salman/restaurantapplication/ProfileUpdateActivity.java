@@ -25,12 +25,14 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
     EditText updatePhone;
     EditText updateAddress;
+    EditText updateEmail;
     EditText updatePassword;
     Button profileUpdate;
 
     Integer customerIDfromEventBus;
     String phoneNumber;
     String Address;
+    String Email;
     String Password;
 
 
@@ -41,6 +43,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         updatePhone = findViewById(R.id.updatePhone);
         updateAddress = findViewById(R.id.updateAddress);
+        updateEmail = findViewById(R.id.updateEmail);
         updatePassword = findViewById(R.id.updatePassword);
         profileUpdate = findViewById(R.id.btnProfileUpdate);
 
@@ -52,24 +55,31 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
                 phoneNumber = updatePhone.getText().toString();
                 Address = updateAddress.getText().toString();
+                Email = updateEmail.getText().toString();
                 Password = updatePassword.getText().toString();
+
 
                 if (!phoneNumber.equals("")) {
                     if (phoneNumber.length() != 11) {
                         updatePhone.setError("Phone Number should be of 11 digits");
                     }
+
+                } else if (!phoneNumber.toString().startsWith("03")) {
+
+                    updatePhone.setError("Phone Number Should start with 03");
+
                 } else {
                     phoneNumber = updatePhone.getText().toString();
                 }
 
                 if (!Password.equals("")) {
-                    if (Password.length() != 6) {
+                    if (Password.length() < 6) {
                         updatePassword.setError("Password must be atleast 6 characters long");
                     }
                 }
 
 
-                Customer customer = new Customer(phoneNumber, Address, Password);
+                Customer customer = new Customer(phoneNumber, Address, Email, Password);
 
 
                 Retrofit retrofit = RetrofitClient.getClient();

@@ -1,10 +1,13 @@
 package com.example.salman.restaurantapplication;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText inputPassword;
     Button btnSignUp;
     Button Login;
+    Button forgotPassword;
 
     String getEmail;
     String getPassword;
@@ -50,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     String customerEmail;
 
+    NotificationManager notificationManager;
+    String Id = "channel 1";
 
 
     @Override
@@ -57,17 +63,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
         toolbar = findViewById(R.id.loginActivityToolbar);
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 
-
         inputEmail = findViewById(R.id.etInputEmail);
         inputPassword = findViewById(R.id.etInputPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
         Login = findViewById(R.id.btnLogin);
+        forgotPassword = findViewById(R.id.btnForgetPassword);
 
         sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
 
@@ -111,13 +119,12 @@ public class LoginActivity extends AppCompatActivity {
                                 EventBus.getDefault().postSticky(new AccountIDEvent(CustomerID));
                                 customerEmail = customerList.get(i).getCustomerEmail();
                             }
-                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                             editor.putString("username", customerEmail);
-                             editor.putInt("customerID", CustomerID);
-                             editor.apply();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("username", customerEmail);
+                            editor.putInt("customerID", CustomerID);
+                            editor.apply();
 
                         }
-
 
 
                         //   AccountInfoEvent accountInfoEvent = new AccountInfoEvent(customerList);
@@ -125,6 +132,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         if (!response.body().isEmpty()) {
+
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(LoginActivity.this, Id)
+                                    .setContentTitle("Login Successful")
+                                    .setSmallIcon(R.drawable.ic_check_mark);
+                            Notification notification = builder.build();
+                            notificationManager.notify(0, notification);
 
                             Intent intent = new Intent(LoginActivity.this, Main2Activity.class);
                             startActivity(intent);
@@ -150,6 +163,12 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
 
