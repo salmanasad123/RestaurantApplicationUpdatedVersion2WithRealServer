@@ -160,14 +160,15 @@
 
         <Button
             android:id="@+id/btnPlaceOrder"
-            android:layout_width="250dp"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/CartTotalBill"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:background="@drawable/round_button"
             android:text="Place Order"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
     </RelativeLayout>
 
 
