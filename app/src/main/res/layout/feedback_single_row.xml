@@ -30,17 +30,6 @@
                 android:text="Feedback"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tvFeedbackCustomerName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="11dp"
-                android:layout_toEndOf="@+id/imgFeedback"
-                android:text="CustomerName"
-                android:textSize="16sp"
-                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imgFeedback"

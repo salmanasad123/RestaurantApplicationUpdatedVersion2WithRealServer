@@ -36,7 +36,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
         Feedback feedback = feedbacks.get(position);
         holder.tvFeedback.setText(feedback.getComment());
         holder.ratingBar.setRating(feedback.getRating());
-        holder.customerName.setText(feedback.getName());
+
     }
 
     @Override
@@ -48,13 +48,13 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
 
         TextView tvFeedback;
         RatingBar ratingBar;
-        TextView customerName;
+
 
         public FeedbackViewHolder(View itemView) {
             super(itemView);
             tvFeedback = itemView.findViewById(R.id.tvFeedBack);
             ratingBar = itemView.findViewById(R.id.feedbackRatingBar);
-            customerName = itemView.findViewById(R.id.tvFeedbackCustomerName);
+
         }
     }
 }
