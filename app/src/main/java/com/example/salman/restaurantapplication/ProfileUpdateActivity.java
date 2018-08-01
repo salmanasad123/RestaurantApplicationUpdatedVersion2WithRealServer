@@ -1,19 +1,28 @@
 package com.example.salman.restaurantapplication;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.ByteArrayOutputStream;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,11 +34,17 @@ import retrofit2.Retrofit;
 public class ProfileUpdateActivity extends AppCompatActivity {
 
     private static final String TAG = "MTAG";
+    private static final int PICK_IMAGE = 100;
+
+    List<Customer> customerList;
 
     EditText updatePhone;
     EditText updateAddress;
     EditText updateEmail;
     EditText updatePassword;
+    ImageView imageView;
+
+    Button editImage;
     Button profileUpdate;
 
     Integer customerIDfromEventBus;
@@ -37,6 +52,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     String Address;
     String Email;
     String Password;
+    String encodedImage;
 
 
     @Override
@@ -48,7 +64,43 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         updateAddress = findViewById(R.id.updateAddress);
         updateEmail = findViewById(R.id.updateEmail);
         updatePassword = findViewById(R.id.updatePassword);
+        imageView = findViewById(R.id.EditProfileImageView);
+        editImage = findViewById(R.id.btnEditImage);
         profileUpdate = findViewById(R.id.btnProfileUpdate);
+
+
+        Retrofit retrofit1 = RetrofitClient.getClient();
+        ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
+        Call<List<Customer>> listCall = apiInterface1.getProfile(customerIDfromEventBus);
+        listCall.enqueue(new Callback<List<Customer>>() {
+            @Override
+            public void onResponse(Call<List<Customer>> call, Response<List<Customer>> response) {
+
+                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+
+                customerList = response.body();
+                for (int i = 0; i < customerList.size(); i++) {
+                    updatePhone.setText(customerList.get(i).getCustomerPhone());
+                    updateAddress.setText(customerList.get(i).getCustomerAddress());
+                    updateEmail.setText(customerList.get(i).getCustomerEmail());
+                    updatePassword.setText(customerList.get(i).getPassword());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Customer>> call, Throwable t) {
+
+                Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+            }
+        });
+
+
+        editImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
 
 
         profileUpdate.setOnClickListener(new View.OnClickListener() {
@@ -103,10 +155,10 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 }
 
 
-                Customer customer = new Customer(phoneNumber, Address, Email, Password);
+                Customer customer = new Customer(phoneNumber, Address, Email, Password, encodedImage);
 
 
-                if (!phoneNumber.equals("") && phoneNumber.length() == 11 && !Address.equals("") && !Email.equals("") && isEmailValid(Email) && !Password.equals("") && Password.length() > 6) {
+                if (!phoneNumber.equals("") && phoneNumber.length() == 11 && !Address.equals("") && !Email.equals("") && isEmailValid(Email) && !Password.equals("") && Password.length() > 5) {
                     Retrofit retrofit = RetrofitClient.getClient();
                     ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -180,4 +232,53 @@ public class ProfileUpdateActivity extends AppCompatActivity {
             return false;
     }
 
+    private void openGallery() {
+        Intent gallery =
+                new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && null != data) {
+            if (resultCode == RESULT_OK) {
+
+                Uri selectedImage = data.getData();
+
+                Log.i("selectedImage", "selectedImage: " + selectedImage.toString());
+
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                cursor.moveToFirst();
+                int columnIndex = cursor
+                        .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                cursor.moveToFirst();
+
+                Log.i("columnIndex", "columnIndex: " + columnIndex);
+
+                final String picturePath = cursor.getString(columnIndex);
+                Log.i("picturePath", "picturePath: " + picturePath);
+
+                cursor.close();
+
+                imageView.setImageURI(selectedImage);
+//                Bitmap bm = BitmapFactory.decodeFile(picturePath);
+                Bitmap bm = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 0, baos);
+                final byte[] b = baos.toByteArray();
+
+                encodedImage = Base64.encodeToString(b, Base64.CRLF);
+                Log.d(TAG, "onActivityResult: " + encodedImage);
+                Log.i("encodedImage", "encodedImagee: " + encodedImage);
+
+
+            }
+        }
+    }
 }

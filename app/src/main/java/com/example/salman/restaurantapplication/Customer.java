@@ -40,11 +40,12 @@ public class Customer {
     @Expose
     private String profileImage;
 
-    public Customer(String customerPhone, String customerAddress, String customerEmail, String password) {
+    public Customer(String customerPhone, String customerAddress, String customerEmail, String password, String encodedImage) {
         this.customerPhone = customerPhone;
         this.customerAddress = customerAddress;
         this.customerEmail = customerEmail;
         this.password = password;
+        this.profileImage = encodedImage;
     }
 
     public Integer getCustomerID() {
