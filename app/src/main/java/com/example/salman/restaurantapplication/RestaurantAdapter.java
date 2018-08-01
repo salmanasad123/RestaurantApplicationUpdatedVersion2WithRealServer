@@ -66,7 +66,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
          * Image View is set with Picasso, Links of Restaurant Images are saved in Database
          */
         holder.restaurantName.setText(restaurant.getRestaurantName());
-        //  holder.restaurantRating.setRating(restaurant.getRating());
+        holder.restaurantRating.setRating(restaurant.getRating());
 
 
         Picasso.with(context)
@@ -152,7 +152,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             cardView = itemView.findViewById(R.id.restaurantCardView);
             restaurantName = itemView.findViewById(R.id.restaurantName);
             restaurantImage = itemView.findViewById(R.id.restaurantImage);
-            //  restaurantRating = itemView.findViewById(R.id.restaurant_rating);
+            restaurantRating = itemView.findViewById(R.id.ratingBarRestaurantSingleRow);
             imageButton = itemView.findViewById(R.id.restaurantInfoButton);
 
         }

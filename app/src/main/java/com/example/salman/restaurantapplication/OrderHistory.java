@@ -51,6 +51,10 @@ public class OrderHistory {
     @SerializedName("ShoppingCartID")
     @Expose
     private Integer shoppingCartID;
+    @SerializedName("PaymentType")
+    @Expose
+    private String paymentType;
+
 
     public Integer getShoppingCartID() {
         return shoppingCartID;
@@ -162,6 +166,14 @@ public class OrderHistory {
 
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 }
 

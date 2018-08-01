@@ -1,12 +1,17 @@
 package com.example.salman.restaurantapplication;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +36,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.SubscriptionEventListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -90,11 +99,50 @@ public class Main2Activity extends AppCompatActivity
 
         mySwipeRefreshLayout = findViewById(R.id.Main2ActivitySwipeRefresh);
 
+
         sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
         Username = sharedPreferences.getString("username", "");
         CustomerIDfromSharedPreferences = sharedPreferences.getInt("customerID", 0);
 
         EventBus.getDefault().postSticky(new AccountIDEvent(CustomerIDfromSharedPreferences));
+
+
+        PusherOptions options = new PusherOptions();
+        options.setCluster("ap2");
+        Pusher pusher = new Pusher("eaf2adbfdc74a2ee954d", options);
+
+        Channel channel = pusher.subscribe("user." + CustomerIDfromSharedPreferences);
+
+        channel.bind("user22", new SubscriptionEventListener() {
+            @Override
+            public void onEvent(String channelName, String eventName, final String data) {
+
+
+                Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+                intent.putExtra("extra", data);
+                PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext(),
+                        (int) System.currentTimeMillis(), intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getApplicationContext())
+                                .setPriority(NotificationCompat.PRIORITY_MAX) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
+                                .setContentTitle("Status Update")
+                                .setContentText("Status Update")
+                                .setTimeoutAfter(100000)
+                                .setSound(soundUri)
+                                .setAutoCancel(true)
+                                .setSmallIcon(R.drawable.ic_check_mark)
+                                .setContentIntent(pIntent)
+                                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000});
+
+
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(0, mBuilder.build());
+
+            }
+        });
+        pusher.connect();
 
         recyclerView = findViewById(R.id.showRestaurants);
         layoutManager = new GridLayoutManager(this, 2);

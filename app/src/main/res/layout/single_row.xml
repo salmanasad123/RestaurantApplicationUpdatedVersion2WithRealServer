@@ -31,9 +31,9 @@
                 android:id="@+id/restaurantName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/restaurantImage"
+                android:layout_alignEnd="@+id/ratingBarRestaurantSingleRow"
                 android:layout_below="@+id/restaurantImage"
-                android:layout_marginEnd="12dp"
+                android:layout_marginTop="25dp"
                 android:paddingLeft="10dp"
                 android:text="TextView"
                 android:textColor="#000000"
@@ -47,7 +47,19 @@
                 android:layout_alignBottom="@+id/restaurantName"
                 android:layout_alignParentEnd="true"
                 android:background="#FFFFFF"
-                app:srcCompat="@drawable/ic_forwardd" />
+                app:srcCompat="@drawable/icon_right" />
+
+            <RatingBar
+                android:id="@+id/ratingBarRestaurantSingleRow"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/restaurantImage"
+                android:layout_centerHorizontal="true"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="1"
+                android:theme="@style/RatingBar" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

@@ -30,6 +30,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
     Dialog dialog;
     TextView productNames;
     TextView productQuantities;
+    TextView PaymentMethod;
     TextView totalBill;
 
     public OrderDetailsAdapter(OrderDetailsActivity orderDetailsActivity, List<OrderHistory> orderHistoryList) {
@@ -56,6 +57,8 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         if (orderHistory.getOrderStatus() == 0) {
             holder.showOrderStatus.setText("Awaiting Confirmation");
         } else if (orderHistory.getOrderStatus() == 1) {
+            holder.showOrderStatus.setText("Cooking");
+        } else if (orderHistory.getOrderStatus() == 2) {
             holder.showOrderStatus.setText("Ready");
         }
         Picasso.with(activity)
@@ -72,11 +75,14 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
 
                 dialog.setContentView(R.layout.order_history_alert_dialog);
                 productNames = dialog.findViewById(R.id.TvOrderHistoryProductNames);
+                PaymentMethod = dialog.findViewById(R.id.tvPaymentMethod);
                 productQuantities = dialog.findViewById(R.id.TvOrderHistoryProductQuantities);
+
                 totalBill = dialog.findViewById(R.id.TvOrderHistoryTotalBillAmount);
 
                 productNames.setGravity(Gravity.CENTER_HORIZONTAL);
                 productNames.setText(orderHistory.getProductName());
+                PaymentMethod.setText(orderHistory.getPaymentType());
                 productQuantities.setText(orderHistory.getQuantity());
                 totalBill.setText(orderHistory.getTotalAmount().toString());
 
