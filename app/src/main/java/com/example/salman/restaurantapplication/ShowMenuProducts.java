@@ -72,7 +72,7 @@ public class ShowMenuProducts extends AppCompatActivity {
          * Retrofit Client
          */
         Retrofit retrofit = RetrofitClient.getClient();
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        final ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Call<List<GetMenuProducts>> listCall = apiInterface.getMenuProducts(getCategoryiD, RestaurantIDfromEventBus);
         listCall.enqueue(new Callback<List<GetMenuProducts>>() {
 
@@ -98,7 +98,28 @@ public class ShowMenuProducts extends AppCompatActivity {
         MenuProductsSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                recyclerViewMenuProducts.setAdapter(productsAdapter);
+
+                Retrofit retrofit1 = RetrofitClient.getClient();
+                final ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
+                Call<List<GetMenuProducts>> call = apiInterface1.getMenuProducts(getCategoryiD, RestaurantIDfromEventBus);
+                call.enqueue(new Callback<List<GetMenuProducts>>() {
+                    @Override
+                    public void onResponse(Call<List<GetMenuProducts>> call, Response<List<GetMenuProducts>> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                        getMenuProducts = response.body();
+                        productsAdapter = new ProductsAdapter(ShowMenuProducts.this, getMenuProducts);
+                        recyclerViewMenuProducts.setAdapter(productsAdapter);
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<GetMenuProducts>> call, Throwable t) {
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+
+
                 MenuProductsSwipeRefreshLayout.setRefreshing(false);
             }
         });
