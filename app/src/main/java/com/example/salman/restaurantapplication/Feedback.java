@@ -21,12 +21,18 @@ public class Feedback {
     @SerializedName("RestaurantID")
     @Expose
     private Integer restaurantID;
+    @SerializedName("CustomerID")
+    @Expose
+    private Integer customerID;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("Name")
+    @Expose
+    private String name;
 
     public Integer getFeedbackID() {
         return feedbackID;
@@ -76,5 +82,20 @@ public class Feedback {
         this.updatedAt = updatedAt;
     }
 
+    public Integer getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(Integer customerID) {
+        this.customerID = customerID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 

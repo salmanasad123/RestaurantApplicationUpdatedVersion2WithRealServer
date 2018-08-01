@@ -1,6 +1,7 @@
 package com.example.salman.restaurantapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.EventLog;
@@ -31,6 +32,9 @@ public class FeedbackActivity extends AppCompatActivity {
     EditText comment;
     Button sendFeedback;
 
+    SharedPreferences sharedPreferences;
+    Integer CustomerIDfromSharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,11 @@ public class FeedbackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feedback);
 
         EventBus.getDefault().register(this);
+
+        sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
+        CustomerIDfromSharedPreferences = sharedPreferences.getInt("customerID", 0);
+
+
         ratingBar = findViewById(R.id.feedbackRating);
         sendFeedback = findViewById(R.id.btnFeedbackSumbit);
         comment = findViewById(R.id.inputFeedback);
@@ -53,7 +62,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
 
                 ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-                Call<Feedback> feedbackCall = apiInterface.sendFeedback(((int) ratingBar.getRating()), comment.getText().toString(), RestaurantID);
+                Call<Feedback> feedbackCall = apiInterface.sendFeedback(((int) ratingBar.getRating()), comment.getText().toString(), RestaurantID, CustomerIDfromSharedPreferences);
 
                 feedbackCall.enqueue(new Callback<Feedback>() {
                     @Override

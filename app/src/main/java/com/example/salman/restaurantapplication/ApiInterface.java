@@ -110,7 +110,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<Feedback> sendFeedback(@Field("Rating") int Rating,
                                 @Field("comment") String comment,
-                                @Field("RestaurantID") int RestaurantID
+                                @Field("RestaurantID") int RestaurantID,
+                                @Field("CustomerID") int CustomerID
 
     );
 

@@ -25,10 +25,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/imgFeedback"
+                android:layout_below="@+id/feedbackRatingBar"
                 android:padding="10dp"
                 android:text="Feedback"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvFeedbackCustomerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="11dp"
+                android:layout_toEndOf="@+id/imgFeedback"
+                android:text="CustomerName"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imgFeedback"
@@ -39,14 +51,13 @@
                 android:src="@drawable/ic_review_coloured_3" />
 
             <RatingBar
+
                 android:id="@+id/feedbackRatingBar"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="16dp"
-                android:layout_toEndOf="@+id/imgFeedback"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imgFeedback"
                 android:rating="0"
                 android:stepSize="1"
                 android:theme="@style/RatingBar" />

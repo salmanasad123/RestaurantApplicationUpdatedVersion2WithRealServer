@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -51,6 +54,7 @@ public class Main2Activity extends AppCompatActivity
     TextView username;
     View mHeaderView;
     String Username;
+    ImageButton filterButton;
 
     private static final String TAG = "MTAG";
     List<Restaurant> restaurants;
@@ -97,6 +101,7 @@ public class Main2Activity extends AppCompatActivity
 
         ImageView imageView = findViewById(R.id.mainImage);
         editText = findViewById(R.id.SearchEditText);
+        filterButton = findViewById(R.id.btnFilterRestaurant);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -217,11 +222,77 @@ public class Main2Activity extends AppCompatActivity
         });
 
 
+        /**
+         *  // FILTER RESTAURANTS ACCORDING TO RATING ////
+         */
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Retrofit retrofit = RetrofitClient.getClient();
+                ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+                Call<List<Restaurant>> listCall = apiInterface.getRestaurants();
+                listCall.enqueue(new Callback<List<Restaurant>>() {
+                    @Override
+                    public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+
+                        restaurants = response.body();
+
+
+                        Collections.sort(restaurants, new Comparator<Restaurant>() {
+                            @Override
+                            public int compare(Restaurant restaurant, Restaurant t1) {
+                                return restaurant.getRating() > t1.getRating() ? -1 : (restaurant.getRating() < t1.getRating()) ? 1 : 0;
+                            }
+                        });
+
+                        restaurantAdapter = new RestaurantAdapter(Main2Activity.this, restaurants);
+                        recyclerView.setAdapter(restaurantAdapter);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Restaurant>> call, Throwable t) {
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+            }
+        });
+
+        /**
+         *  //////////////////// ON SWIPE REFRESH //////////////////////
+         */
         mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                recyclerView.setAdapter(restaurantAdapter);
-                mySwipeRefreshLayout.setRefreshing(false);
+
+                if (UserLongitude == 0.0 && UserLatitude == 0.0) {
+
+                    Retrofit retrofit1 = RetrofitClient.getClient();
+                    ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
+                    Call<List<Restaurant>> call = apiInterface1.getRestaurants();
+                    call.enqueue(new Callback<List<Restaurant>>() {
+
+                        @Override
+                        public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+
+                            Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+
+                            restaurants = response.body();
+                            restaurantAdapter = new RestaurantAdapter(Main2Activity.this, restaurants);
+                            recyclerView.setAdapter(restaurantAdapter);
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<Restaurant>> call, Throwable t) {
+                            Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                        }
+                    });
+
+                    mySwipeRefreshLayout.setRefreshing(false);
+                }
             }
         });
     }
