@@ -107,43 +107,6 @@ public class Main2Activity extends AppCompatActivity
         EventBus.getDefault().postSticky(new AccountIDEvent(CustomerIDfromSharedPreferences));
 
 
-        PusherOptions options = new PusherOptions();
-        options.setCluster("ap2");
-        Pusher pusher = new Pusher("eaf2adbfdc74a2ee954d", options);
-
-        Channel channel = pusher.subscribe("user." + CustomerIDfromSharedPreferences);
-
-        channel.bind("user22", new SubscriptionEventListener() {
-            @Override
-            public void onEvent(String channelName, String eventName, final String data) {
-
-
-                Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
-                intent.putExtra("extra", data);
-                PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext(),
-                        (int) System.currentTimeMillis(), intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(getApplicationContext())
-                                .setPriority(NotificationCompat.PRIORITY_MAX) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
-                                .setContentTitle("Status Update")
-                                .setContentText("Status Update")
-                                .setTimeoutAfter(100000)
-                                .setSound(soundUri)
-                                .setAutoCancel(true)
-                                .setSmallIcon(R.drawable.ic_check_mark)
-                                .setContentIntent(pIntent)
-                                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000});
-
-
-                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(0, mBuilder.build());
-
-            }
-        });
-        pusher.connect();
-
         recyclerView = findViewById(R.id.showRestaurants);
         layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -370,6 +333,44 @@ public class Main2Activity extends AppCompatActivity
             }
 
         });
+
+        PusherOptions options = new PusherOptions();
+        options.setCluster("ap2");
+        Pusher pusher = new Pusher("eaf2adbfdc74a2ee954d", options);
+
+        Channel channel = pusher.subscribe("user." + CustomerIDfromSharedPreferences);
+
+        channel.bind("user22", new SubscriptionEventListener() {
+            @Override
+            public void onEvent(String channelName, String eventName, final String data) {
+
+
+                Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+                intent.putExtra("extra", data);
+                PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext(),
+                        (int) System.currentTimeMillis(), intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getApplicationContext())
+                                .setPriority(NotificationCompat.PRIORITY_MAX) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
+                                .setContentTitle("Status Update")
+                                .setContentText("Status Update")
+                                .setTimeoutAfter(100000)
+                                .setSound(soundUri)
+                                .setAutoCancel(true)
+                                .setSmallIcon(R.drawable.ic_check_mark)
+                                .setContentIntent(pIntent)
+                                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000});
+
+
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(0, mBuilder.build());
+
+            }
+        });
+        pusher.connect();
+
     }
 
     @Override
