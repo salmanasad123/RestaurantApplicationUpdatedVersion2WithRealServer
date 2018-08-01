@@ -1,5 +1,6 @@
 package com.example.salman.restaurantapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
@@ -48,8 +49,6 @@ import retrofit2.Retrofit;
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private LocationManager locationManager;
-
 
     TextView username;
     View mHeaderView;
@@ -68,6 +67,9 @@ public class Main2Activity extends AppCompatActivity
     Integer CustomerIDfromSharedPreferences;
 
     SwipeRefreshLayout mySwipeRefreshLayout;
+    LocationManager locationManager;
+    boolean gps_enabled;
+    boolean network_enabled = false;
 
     double UserLongitude;
     double UserLatitude;
@@ -268,7 +270,30 @@ public class Main2Activity extends AppCompatActivity
             @Override
             public void onRefresh() {
 
-                if (UserLongitude == 0.0 && UserLatitude == 0.0) {
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+                /*
+                try {
+                    if (locationManager != null) {
+                        gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                    }
+                } catch (Exception ex) {
+
+                }
+                try {
+                    network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                } catch (Exception ex) {
+
+                }
+*/
+
+                if (locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    gps_enabled = true;
+
+                }
+
+
+                if (!gps_enabled) {
 
                     Retrofit retrofit1 = RetrofitClient.getClient();
                     ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
@@ -293,7 +318,9 @@ public class Main2Activity extends AppCompatActivity
 
                     mySwipeRefreshLayout.setRefreshing(false);
                 }
+
             }
+
         });
     }
 

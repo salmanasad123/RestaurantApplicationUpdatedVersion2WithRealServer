@@ -268,7 +268,7 @@ public class RegisterActivity extends AppCompatActivity {
                 cursor.close();
 
                 imageView.setImageURI(selectedImage);
-//                Bitmap bm = BitmapFactory.decodeFile(picturePath);
+//              Bitmap bm = BitmapFactory.decodeFile(picturePath);
                 Bitmap bm = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 0, baos);

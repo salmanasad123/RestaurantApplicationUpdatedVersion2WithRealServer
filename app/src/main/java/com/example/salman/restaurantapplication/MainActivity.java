@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 if (longitude != 0.0 && latitude != 0.0) {
                     findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 }
-                Toast.makeText(MainActivity.this, "" + longitude + " " + latitude, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Location Acquired", Toast.LENGTH_SHORT).show();
 
             }
 

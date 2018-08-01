@@ -89,10 +89,11 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
                     temp = customerList.get(i).getProfileImage();
 
-                    byte[] decodedString = Base64.decode(temp, Base64.DEFAULT);
-                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    imageView.setImageBitmap(decodedByte);
-
+                    if (temp != null && temp != "") {
+                        byte[] decodedString = Base64.decode(temp, Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        imageView.setImageBitmap(decodedByte);
+                    }
                 }
             }
 
