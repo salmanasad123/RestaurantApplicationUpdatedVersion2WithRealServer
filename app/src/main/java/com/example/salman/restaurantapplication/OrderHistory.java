@@ -24,6 +24,9 @@ public class OrderHistory {
     @SerializedName("TotalAmount")
     @Expose
     private Integer totalAmount;
+    @SerializedName("OrderStatus")
+    @Expose
+    private Integer orderStatus;
     @SerializedName("CustomerID")
     @Expose
     private Integer customerID;
@@ -153,5 +156,12 @@ public class OrderHistory {
         this.restaurantAddress = restaurantAddress;
     }
 
+    public Integer getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 }
 

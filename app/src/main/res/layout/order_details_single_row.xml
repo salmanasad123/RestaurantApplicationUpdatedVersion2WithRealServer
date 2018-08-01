@@ -7,13 +7,13 @@
     <android.support.v7.widget.CardView
         android:id="@+id/orderDetailsCardView"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="110dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="12dp"
+        android:alpha="0.9"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="8dp"
-        android:alpha="0.9"
         app:cardElevation="8dp">
 
         <RelativeLayout
@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/restaurantNameTextView"
                 android:layout_below="@+id/restaurantNameTextView"
+                android:layout_marginTop="4dp"
                 android:text="Restaurant Address"
                 android:textColor="#000000"
                 android:textSize="16sp" />
@@ -57,9 +58,35 @@
                 android:id="@+id/tvOrderType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/restaurantImageView"
                 android:layout_alignStart="@+id/restaurantAddress"
-                android:text="TextView"
+                android:layout_below="@+id/restaurantAddress"
+                android:layout_marginTop="4dp"
+                android:text="Order Type"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvOrderStatus"
+                android:layout_alignBottom="@+id/tvOrderStatus"
+                android:layout_alignStart="@+id/tvOrderType"
+                android:layout_marginTop="4dp"
+                android:text="Order Status: "
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvOrderStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvOrderType"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@+id/textView2"
+                android:text="Order Status Show"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 

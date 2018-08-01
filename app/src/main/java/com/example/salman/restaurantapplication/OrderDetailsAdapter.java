@@ -51,9 +51,16 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         holder.tvRestaurantName.setText(orderHistory.getRestaurantName());
         holder.tvRestaurantAddress.setText(orderHistory.getRestaurantAddress());
         holder.tvOrderType.setText(orderHistory.getOrderType());
+        Log.d(TAG, "onBindViewHolder: " + orderHistory.getOrderStatus());
+
+        if (orderHistory.getOrderStatus() == 0) {
+            holder.showOrderStatus.setText("Awaiting Confirmation");
+        } else if (orderHistory.getOrderStatus() == 1) {
+            holder.showOrderStatus.setText("Ready");
+        }
         Picasso.with(activity)
                 .load(orderHistory.getLink())
-                .resize(250, 250)
+                .resize(300, 300)
                 .into(holder.RestaurantImageView);
 
 
@@ -91,6 +98,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         TextView tvRestaurantAddress;
         TextView tvOrderType;
         ImageView RestaurantImageView;
+        TextView showOrderStatus;
 
 
         public OrderDetailsViewHolder(View itemView) {
@@ -99,6 +107,8 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
             tvRestaurantAddress = itemView.findViewById(R.id.restaurantAddress);
             tvOrderType = itemView.findViewById(R.id.tvOrderType);
             RestaurantImageView = itemView.findViewById(R.id.restaurantImageView);
+            showOrderStatus = itemView.findViewById(R.id.tvOrderStatus);
+
         }
     }
 }

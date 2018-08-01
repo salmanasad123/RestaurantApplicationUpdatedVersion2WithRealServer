@@ -1,6 +1,7 @@
 package com.example.salman.restaurantapplication;
 
 import android.content.SharedPreferences;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
 
+    SwipeRefreshLayout refreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_details);
 
 
+        refreshLayout = findViewById(R.id.swipeRefreshOrderDetails);
         preferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
         CustomerIDfromSharedPreference = preferences.getInt("customerID", 0);
 
@@ -47,9 +51,10 @@ public class OrderDetailsActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        Retrofit retrofit = RetrofitClient.getClient();
+        final Retrofit retrofit = RetrofitClient.getClient();
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call<List<OrderHistory>> listCall = apiInterface.getOrderHistory(CustomerIDfromSharedPreference);
+        final Call<List<OrderHistory>> listCall = apiInterface.getOrderHistory(CustomerIDfromSharedPreference);
+
 
         listCall.enqueue(new Callback<List<OrderHistory>>() {
             @Override
@@ -69,6 +74,33 @@ public class OrderDetailsActivity extends AppCompatActivity {
             }
         });
 
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Retrofit retrofit1 = RetrofitClient.getClient();
+                ApiInterface apiInterface1 = retrofit1.create(ApiInterface.class);
+                Call<List<OrderHistory>> call = apiInterface1.getOrderHistory(CustomerIDfromSharedPreference);
+
+                call.enqueue(new Callback<List<OrderHistory>>() {
+                    @Override
+                    public void onResponse(Call<List<OrderHistory>> call, Response<List<OrderHistory>> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                        orderHistoryList = response.body();
+                        orderDetailsAdapter = new OrderDetailsAdapter(OrderDetailsActivity.this, orderHistoryList);
+                        recyclerView.setAdapter(orderDetailsAdapter);
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<OrderHistory>> call, Throwable t) {
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+
+                refreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 
