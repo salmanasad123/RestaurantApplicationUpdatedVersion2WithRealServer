@@ -50,7 +50,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="424dp"
         android:text="One of our team members would be delighted to assist you.Simply drop us a line on slman360@hotmail.com and one of us will be in touch to see how we can send more customers your way."
-        android:textAlignment="textStart"
+
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="196dp"
         android:text="Are you looking for the right restaurant that fits your taste? Look no further because we got you covered.Eat it is a complete food platform that helps you discover the best eateries around you.We are all about creating connections about foodies and restaurants."
         android:textAlignment="textStart"
