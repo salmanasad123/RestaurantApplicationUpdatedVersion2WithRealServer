@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Salman on 6/22/2018.
  */
-//"http://www.grocestores.com/fyprestaurant/"
+//"http://www.grocestores.com/fyprestaurantf14/"
 public class RetrofitClient {
 
     private static Retrofit retrofit = null;

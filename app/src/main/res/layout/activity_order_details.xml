@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshOrderDetails"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/ic_background_login"
     tools:context="com.example.salman.restaurantapplication.OrderDetailsActivity">
 
