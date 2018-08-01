@@ -3,6 +3,7 @@ package com.example.salman.restaurantapplication;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -52,8 +53,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     String Address;
     String Email;
     String Password;
-    String encodedImage;
 
+    String encodedImage;
+    String temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,13 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     updateAddress.setText(customerList.get(i).getCustomerAddress());
                     updateEmail.setText(customerList.get(i).getCustomerEmail());
                     updatePassword.setText(customerList.get(i).getPassword());
+
+                    temp = customerList.get(i).getProfileImage();
+
+                    byte[] decodedString = Base64.decode(temp, Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    imageView.setImageBitmap(decodedByte);
+
                 }
             }
 
