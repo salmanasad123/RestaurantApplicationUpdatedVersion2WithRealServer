@@ -335,6 +335,12 @@ public class Main2Activity extends AppCompatActivity
             editor.apply();
             Intent intent = new Intent(Main2Activity.this, LoginActivity.class);
             startActivity(intent);
+
+        } else if (id == R.id.nav_about) {
+
+            Intent intent = new Intent(Main2Activity.this, AboutUsActivity.class);
+            startActivity(intent);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
