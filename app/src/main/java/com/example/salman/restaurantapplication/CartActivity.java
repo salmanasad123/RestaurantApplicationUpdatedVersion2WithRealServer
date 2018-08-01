@@ -51,6 +51,7 @@ public class CartActivity extends AppCompatActivity {
     List<Cart> OrderDetailsList;
 
     SharedPreferences preferences;
+    SharedPreferences sharedPreferences;
     Integer CustomerIDfromSharedPreference;
 
     AlertDialog alertDialog;
@@ -120,6 +121,11 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 clear();
+
+                sharedPreferences = getSharedPreferences("ProductsSP", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit().clear();
+                editor.apply();
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
                 View placeOrder = LayoutInflater.from(CartActivity.this).inflate(R.layout.cart_alert_dialog, null);
@@ -288,6 +294,7 @@ public class CartActivity extends AppCompatActivity {
         ProductsAdapter productsAdapter = null;
         productsAdapter.shoppingcartid = 0;
         productsAdapter.customerIDfromshoppingcartstable = 0;
+
 
     }
 

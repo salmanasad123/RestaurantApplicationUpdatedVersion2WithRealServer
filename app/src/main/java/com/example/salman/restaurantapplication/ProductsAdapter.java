@@ -85,8 +85,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.produc
         sharedPreferences.getString("btnState" + products.getRestaurantID() + products.getProductName(), "None");
 
         //*******
-        SharedPreferences.Editor editor = sharedPreferences.edit().clear();
-        editor.apply();
+        //  SharedPreferences.Editor editor = sharedPreferences.edit().clear();
+        //  editor.apply();
 
         //*********
         Log.d(TAG, "onBindViewHolder: SharedPref" + name);
