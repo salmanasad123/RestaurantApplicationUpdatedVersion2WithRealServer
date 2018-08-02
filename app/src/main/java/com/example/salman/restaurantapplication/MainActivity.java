@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 if (username != "x") {
                     Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                locationManager.requestLocationUpdates("gps", 1200000, 0, locationListener);
+                 locationManager.requestLocationUpdates("gps", 1200000, 0, locationListener);
             }
         });
 

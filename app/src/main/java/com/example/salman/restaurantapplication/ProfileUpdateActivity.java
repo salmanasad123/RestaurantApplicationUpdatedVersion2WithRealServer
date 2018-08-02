@@ -214,6 +214,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     public void moveToLoginActivity() {
         Intent intent = new Intent(ProfileUpdateActivity.this, Main2Activity.class);
         startActivity(intent);
+        finish();
     }
 
 

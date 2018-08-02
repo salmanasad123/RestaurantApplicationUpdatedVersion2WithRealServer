@@ -24,6 +24,7 @@ public class PlaceOrderThankYouActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PlaceOrderThankYouActivity.this, Main2Activity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -60,6 +60,8 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
             holder.showOrderStatus.setText("Cooking");
         } else if (orderHistory.getOrderStatus() == 2) {
             holder.showOrderStatus.setText("Ready");
+        } else if (orderHistory.getOrderStatus() == 3) {
+            holder.showOrderStatus.setText("Completed");
         }
         Picasso.with(activity)
                 .load(orderHistory.getLink())

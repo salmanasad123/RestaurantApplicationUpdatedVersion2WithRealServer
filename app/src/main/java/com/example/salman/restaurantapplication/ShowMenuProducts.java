@@ -148,6 +148,7 @@ public class ShowMenuProducts extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ShowMenuProducts.this, CartActivity.class);
                 startActivity(intent);
+
             }
         });
     }

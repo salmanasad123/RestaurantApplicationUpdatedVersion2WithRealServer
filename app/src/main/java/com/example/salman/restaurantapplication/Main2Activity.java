@@ -411,6 +411,7 @@ public class Main2Activity extends AppCompatActivity
             editor.apply();
             Intent intent = new Intent(Main2Activity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
 
         } else if (id == R.id.nav_about) {
 

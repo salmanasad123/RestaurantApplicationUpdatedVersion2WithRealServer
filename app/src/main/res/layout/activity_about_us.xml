@@ -64,7 +64,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="196dp"
-        android:text="Are you looking for the right restaurant that fits your taste? Look no further because we got you covered.Eat it is a complete food platform that helps you discover the best eateries around you.We are all about creating connections about foodies and restaurants."
+        android:text="Are you looking for the right restaurant that fits your taste? Look no further because we got you covered.Eat it is a complete food platform that helps you discover the best eateries around you.We are all about creating connections about foodies and restaurants.
+In  Case of any query feel free to contact us at slman360@hotmail.com"
         android:textAlignment="textStart"
         android:textColor="#FFFFFF"
         android:textSize="16sp"

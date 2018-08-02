@@ -244,11 +244,13 @@ public class CartActivity extends AppCompatActivity {
 
                                                 Intent intent = new Intent(CartActivity.this, PlaceOrderThankYouActivity.class);
                                                 startActivity(intent);
+                                                finish();
                                             } else {
 
                                                 Intent intent = new Intent(CartActivity.this, PaypalActivity.class);
                                                 intent.putExtra("cartTotalAmount", Total);
                                                 startActivity(intent);
+                                                finish();
 
                                             }
                                         }
